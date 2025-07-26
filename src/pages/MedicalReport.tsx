@@ -182,7 +182,7 @@ This analysis is for informational purposes only and should not replace professi
                   <Activity className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <h1 className="text-2xl font-bold bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
+                  <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
                     Medical Report Analysis
                   </h1>
                   <div className="flex items-center gap-2 mt-1">

@@ -6,56 +6,56 @@
 
 @layer base {
   :root {
-    /* Modern color palette with better contrast */
-    --background: 210 30% 99%;
-    --foreground: 215 30% 12%;
+    /* Enhanced Glassmorphism color palette */
+    --background: 210 40% 98%;
+    --foreground: 215 35% 15%;
 
     --card: 0 0% 100%;
-    --card-foreground: 215 30% 12%;
+    --card-foreground: 215 35% 15%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 215 30% 12%;
+    --popover-foreground: 215 35% 15%;
 
-    /* Modern gradient primary */
-    --primary: 214 95% 55%;
+    /* Enhanced glassmorphism primary */
+    --primary: 220 100% 60%;
     --primary-foreground: 0 0% 100%;
-    --primary-glow: 214 95% 70%;
+    --primary-glow: 220 100% 75%;
 
-    /* Enhanced secondary */
-    --secondary: 160 50% 82%;
-    --secondary-foreground: 160 90% 20%;
+    /* Enhanced glassmorphism secondary */
+    --secondary: 160 60% 85%;
+    --secondary-foreground: 160 90% 25%;
 
-    --muted: 210 25% 97%;
-    --muted-foreground: 215 20% 50%;
+    --muted: 210 30% 96%;
+    --muted-foreground: 215 25% 55%;
 
-    /* Modern accent */
-    --accent: 175 70% 85%;
-    --accent-foreground: 175 90% 20%;
+    /* Enhanced glassmorphism accent */
+    --accent: 180 80% 88%;
+    --accent-foreground: 180 90% 25%;
 
     --destructive: 0 85% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 210 20% 92%;
-    --input: 210 20% 96%;
-    --ring: 214 95% 55%;
+    --border: 210 25% 90%;
+    --input: 210 25% 94%;
+    --ring: 220 100% 60%;
 
-    /* Modern gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(214 95% 55%), hsl(175 85% 55%));
-    --gradient-hero: linear-gradient(135deg, hsl(214 95% 55%) 0%, hsl(190 85% 60%) 50%, hsl(175 85% 55%) 100%);
-    --gradient-soft: linear-gradient(180deg, hsl(210 30% 99%), hsl(175 25% 97%));
-    --gradient-card: linear-gradient(145deg, hsl(0 0% 100% / 0.95), hsl(210 25% 98% / 0.8));
-    --gradient-glass: linear-gradient(145deg, hsl(0 0% 100% / 0.1), hsl(210 25% 98% / 0.05));
+    /* Enhanced glassmorphism gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(220 100% 60%), hsl(180 90% 60%));
+    --gradient-hero: linear-gradient(135deg, hsl(220 100% 60%) 0%, hsl(195 90% 65%) 50%, hsl(180 90% 60%) 100%);
+    --gradient-soft: linear-gradient(180deg, hsl(210 40% 98%), hsl(180 30% 96%));
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 100% / 0.7), hsl(210 30% 98% / 0.5));
+    --gradient-glass: linear-gradient(145deg, hsl(0 0% 100% / 0.25), hsl(210 30% 98% / 0.1));
 
-    /* Enhanced shadows */
-    --shadow-soft: 0 4px 25px hsl(210 25% 75% / 0.25);
-    --shadow-glow: 0 0 40px hsl(214 95% 65% / 0.25);
-    --shadow-card: 0 10px 30px hsl(210 20% 70% / 0.12);
-    --shadow-float: 0 15px 40px hsl(210 20% 70% / 0.15);
+    /* Enhanced glassmorphism shadows */
+    --shadow-soft: 0 8px 35px hsl(210 30% 70% / 0.3);
+    --shadow-glow: 0 0 60px hsl(220 100% 70% / 0.4);
+    --shadow-card: 0 15px 45px hsl(210 25% 65% / 0.2);
+    --shadow-float: 0 20px 60px hsl(210 25% 65% / 0.25);
 
-    /* Modern transitions */
-    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-spring: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    /* Enhanced glassmorphism transitions */
+    --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-spring: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
     --radius: 0.75rem;
 
@@ -71,33 +71,33 @@
   }
 
   .dark {
-    /* Modern dark theme */
-    --background: 215 30% 6%;
-    --foreground: 210 35% 96%;
+    /* Enhanced glassmorphism dark theme */
+    --background: 220 35% 8%;
+    --foreground: 210 40% 95%;
 
-    --card: 215 25% 10%;
-    --card-foreground: 210 35% 96%;
+    --card: 220 30% 12%;
+    --card-foreground: 210 40% 95%;
 
-    --popover: 215 25% 10%;
-    --popover-foreground: 210 35% 96%;
+    --popover: 220 30% 12%;
+    --popover-foreground: 210 40% 95%;
 
-    --primary: 214 95% 65%;
+    --primary: 220 100% 70%;
     --primary-foreground: 0 0% 100%;
-    --primary-glow: 214 95% 80%;
+    --primary-glow: 220 100% 85%;
 
-    --secondary: 160 35% 22%;
-    --secondary-foreground: 160 70% 88%;
+    --secondary: 160 40% 25%;
+    --secondary-foreground: 160 75% 90%;
 
-    --muted: 215 20% 12%;
-    --muted-foreground: 215 15% 68%;
+    --muted: 220 25% 15%;
+    --muted-foreground: 215 20% 70%;
 
-    --accent: 175 45% 18%;
-    --accent-foreground: 175 70% 88%;
+    --accent: 180 50% 22%;
+    --accent-foreground: 180 75% 90%;
 
     --destructive: 0 85% 65%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 215 20% 18%;
+    --border: 220 25% 20%;
     --input: 215 20% 15%;
     --ring: 214 95% 65%;
 

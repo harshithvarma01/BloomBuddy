@@ -1,4 +1,4 @@
-import { Activity, Moon, Sun, Settings, Heart, Stethoscope, Zap, Shield, Bell } from 'lucide-react';
+import { Activity, Moon, Sun, Heart, Stethoscope, Zap, Shield } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useState } from 'react';
 
@@ -59,7 +59,6 @@ interface HeaderProps {
 
 export const Header = ({ onLogoClick }: HeaderProps) => {
   const [isDark, setIsDark] = useState(false);
-  const [hasNotifications, setHasNotifications] = useState(true);
 
   const toggleTheme = () => {
     setIsDark(!isDark);
@@ -82,21 +81,6 @@ export const Header = ({ onLogoClick }: HeaderProps) => {
           
           {/* Enhanced Controls */}
           <div className="flex items-center gap-4">
-            {/* Notification Button */}
-            <div className="relative">
-              <Button
-                onClick={() => setHasNotifications(false)}
-                variant="ghost"
-                size="sm"
-                className="text-white/90 hover:text-white hover:bg-white/20 transition-all duration-300 rounded-xl p-3 backdrop-blur-sm border border-white/20 shadow-lg"
-              >
-                <Bell className="w-5 h-5 drop-shadow-sm" />
-              </Button>
-              {hasNotifications && (
-                <div className="absolute -top-1 -right-1 w-3 h-3 bg-gradient-to-r from-red-500 to-orange-500 rounded-full border border-white animate-pulse shadow-lg"></div>
-              )}
-            </div>
-            
             {/* Theme Toggle */}
             <Button
               onClick={toggleTheme}
@@ -105,15 +89,6 @@ export const Header = ({ onLogoClick }: HeaderProps) => {
               className="text-white/90 hover:text-white hover:bg-white/20 transition-all duration-300 rounded-xl p-3 backdrop-blur-sm border border-white/20 shadow-lg"
             >
               {isDark ? <Sun className="w-5 h-5 drop-shadow-sm" /> : <Moon className="w-5 h-5 drop-shadow-sm" />}
-            </Button>
-            
-            {/* Settings Button */}
-            <Button
-              variant="ghost"
-              size="sm"
-              className="text-white/90 hover:text-white hover:bg-white/20 transition-all duration-300 rounded-xl p-3 backdrop-blur-sm border border-white/20 shadow-lg"
-            >
-              <Settings className="w-5 h-5 drop-shadow-sm" />
             </Button>
             
             {/* Enhanced Status Panel */}
