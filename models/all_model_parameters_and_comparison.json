@@ -1,0 +1,427 @@
+{
+  "extraction_timestamp": "2025-07-26T15:24:15.638894",
+  "models": {
+    "diabetes": {
+      "model_type": "RandomForestClassifier",
+      "scaler_type": "StandardScaler",
+      "model_parameters": {
+        "bootstrap": true,
+        "ccp_alpha": 0.0,
+        "class_weight": null,
+        "criterion": "gini",
+        "max_depth": null,
+        "max_features": "sqrt",
+        "max_leaf_nodes": null,
+        "max_samples": null,
+        "min_impurity_decrease": 0.0,
+        "min_samples_leaf": 1,
+        "min_samples_split": 2,
+        "min_weight_fraction_leaf": 0.0,
+        "monotonic_cst": null,
+        "n_estimators": 100,
+        "n_jobs": null,
+        "oob_score": false,
+        "random_state": 42,
+        "verbose": 0,
+        "warm_start": false
+      },
+      "scaler_parameters": {
+        "copy": true,
+        "with_mean": true,
+        "with_std": true
+      },
+      "model_attributes": {
+        "n_features_in": 8,
+        "classes": [
+          0.0,
+          1.0
+        ],
+        "feature_importances": [
+          0.07498845919921196,
+          0.26494323711188045,
+          0.08914955039846556,
+          0.0663509253873854,
+          0.07783878323355743,
+          0.16329138482463035,
+          0.12242750828807754,
+          0.14101015155679117
+        ],
+        "n_estimators": 100
+      },
+      "scaler_attributes": {
+        "mean": [
+          3.8450520833333335,
+          121.65625,
+          72.38671875,
+          27.334635416666668,
+          94.65234375,
+          32.45091145833333,
+          0.47187630208333325,
+          33.240885416666664
+        ],
+        "scale": [
+          3.3673836124089958,
+          30.418462775166116,
+          12.088763750899638,
+          9.223003870101776,
+          105.47886016839347,
+          6.870888861899677,
+          0.3311128160286291,
+          11.752572645994181
+        ],
+        "variance": [
+          11.339272393120657,
+          925.2828776041666,
+          146.1382090250651,
+          85.06380038791232,
+          11125.789942423502,
+          47.20911375257703,
+          0.10963569693840876,
+          138.12296379937067
+        ],
+        "n_features_in": 8
+      }
+    },
+    "heart": {
+      "model_type": "XGBClassifier",
+      "scaler_type": "StandardScaler",
+      "model_parameters": {
+        "objective": "binary:logistic",
+        "base_score": null,
+        "booster": null,
+        "callbacks": null,
+        "colsample_bylevel": null,
+        "colsample_bynode": null,
+        "colsample_bytree": null,
+        "device": null,
+        "early_stopping_rounds": null,
+        "enable_categorical": false,
+        "eval_metric": "logloss",
+        "feature_types": null,
+        "feature_weights": null,
+        "gamma": null,
+        "grow_policy": null,
+        "importance_type": null,
+        "interaction_constraints": null,
+        "learning_rate": null,
+        "max_bin": null,
+        "max_cat_threshold": null,
+        "max_cat_to_onehot": null,
+        "max_delta_step": null,
+        "max_depth": null,
+        "max_leaves": null,
+        "min_child_weight": null,
+        "missing": NaN,
+        "monotone_constraints": null,
+        "multi_strategy": null,
+        "n_estimators": null,
+        "n_jobs": null,
+        "num_parallel_tree": null,
+        "random_state": 42,
+        "reg_alpha": null,
+        "reg_lambda": null,
+        "sampling_method": null,
+        "scale_pos_weight": null,
+        "subsample": null,
+        "tree_method": null,
+        "validate_parameters": null,
+        "verbosity": null,
+        "use_label_encoder": false
+      },
+      "scaler_parameters": {
+        "copy": true,
+        "with_mean": true,
+        "with_std": true
+      },
+      "model_attributes": {
+        "intercept": [
+          0.5495867729187012
+        ],
+        "n_features_in": 13,
+        "classes": [
+          0,
+          1
+        ],
+        "feature_importances": [
+          0.03397936746478081,
+          0.06314602494239807,
+          0.21066536009311676,
+          0.0326072983443737,
+          0.02984222024679184,
+          0.01425983663648367,
+          0.024335255846381187,
+          0.032678376883268356,
+          0.1435813456773758,
+          0.08562907576560974,
+          0.051545631140470505,
+          0.12275927513837814,
+          0.15497101843357086
+        ],
+        "n_estimators": null
+      },
+      "scaler_attributes": {
+        "mean": [
+          54.366336633663366,
+          0.6831683168316832,
+          0.966996699669967,
+          131.62376237623764,
+          246.26402640264027,
+          0.1485148514851485,
+          0.528052805280528,
+          149.64686468646866,
+          0.32673267326732675,
+          1.0396039603960396,
+          1.3993399339933994,
+          0.7293729372937293,
+          2.3135313531353137
+        ],
+        "scale": [
+          9.067101638577872,
+          0.46524119304834577,
+          1.0303480250839463,
+          17.509178065734393,
+          51.74515101045713,
+          0.3556096038825341,
+          0.5249911240963214,
+          22.86733258188924,
+          0.46901858543869346,
+          1.1591574732421364,
+          0.6152084301256651,
+          1.0209175011165652,
+          0.6112653149988239
+        ],
+        "variance": [
+          82.21233212430153,
+          0.21644936770904813,
+          1.0616170527943882,
+          306.5713165375944,
+          2677.560653095012,
+          0.1264581903734928,
+          0.2756156803799191,
+          522.9148994107331,
+          0.219978433486913,
+          1.3436460477730943,
+          0.37848141249768535,
+          1.0422725440860918,
+          0.3736452853206113
+        ],
+        "n_features_in": 13
+      }
+    },
+    "hypertension": {
+      "model_type": "LogisticRegression",
+      "scaler_type": "StandardScaler",
+      "model_parameters": {
+        "C": 1.0,
+        "class_weight": null,
+        "dual": false,
+        "fit_intercept": true,
+        "intercept_scaling": 1,
+        "l1_ratio": null,
+        "max_iter": 100,
+        "multi_class": "deprecated",
+        "n_jobs": null,
+        "penalty": "l2",
+        "random_state": 42,
+        "solver": "lbfgs",
+        "tol": 0.0001,
+        "verbose": 0,
+        "warm_start": false
+      },
+      "scaler_parameters": {
+        "copy": true,
+        "with_mean": true,
+        "with_std": true
+      },
+      "model_attributes": {
+        "coefficients": [
+          [
+            0.2527219583546423,
+            0.21879307311275792,
+            -0.08337022686573901,
+            0.02582341625398102,
+            1.199471322077315,
+            0.02712201295024664,
+            -0.012911386040464237,
+            2.4632923742246,
+            1.0394544364038223,
+            0.3109805216225227,
+            0.1559747060687272,
+            0.011077051351232204
+          ]
+        ],
+        "intercept": [
+          -1.3605160440639386
+        ],
+        "n_features_in": 12,
+        "classes": [
+          0,
+          1
+        ]
+      },
+      "scaler_attributes": {
+        "mean": [
+          0.4452146094374833,
+          49.57344708077846,
+          0.48840309250866437,
+          9.008531058384431,
+          0.03039189549453479,
+          0.027192748600373233,
+          236.92801919488136,
+          132.3684350839776,
+          82.93854972007465,
+          25.808288456411624,
+          75.70407891229006,
+          81.88003199146894
+        ],
+        "scale": [
+          0.49698949785776403,
+          8.569061971319494,
+          0.49986549364467775,
+          11.923506833041294,
+          0.17166312412042395,
+          0.16264471409772324,
+          44.60564658269342,
+          22.04358351472387,
+          11.931188624201038,
+          4.065056710578749,
+          11.954788280626943,
+          23.879049704047507
+        ],
+        "variance": [
+          0.2469985609809124,
+          73.42882306831393,
+          0.24986551173663735,
+          142.17001519758242,
+          0.029468228182784075,
+          0.026453303023930137,
+          1989.6637070601487,
+          485.9195741706059,
+          142.35326198626427,
+          16.524686060221317,
+          142.9169628346153,
+          570.2090147683713
+        ],
+        "n_features_in": 12
+      }
+    }
+  },
+  "model_comparison": {
+    "summary": {
+      "total_models": 3,
+      "algorithms_used": [
+        "RandomForestClassifier",
+        "XGBClassifier",
+        "LogisticRegression"
+      ],
+      "feature_count_range": [
+        8,
+        13
+      ],
+      "comparison_table": [
+        {
+          "Model": "Diabetes",
+          "Algorithm": "RandomForestClassifier",
+          "Scaler": "StandardScaler",
+          "Features": 8,
+          "Classes": 2,
+          "N_Estimators": NaN,
+          "Learning_Rate": NaN,
+          "Max_Depth": NaN,
+          "C": NaN,
+          "Solver": NaN,
+          "Max_Iter": NaN
+        },
+        {
+          "Model": "Heart",
+          "Algorithm": "XGBClassifier",
+          "Scaler": "StandardScaler",
+          "Features": 13,
+          "Classes": 2,
+          "N_Estimators": "N/A",
+          "Learning_Rate": "N/A",
+          "Max_Depth": "N/A",
+          "C": NaN,
+          "Solver": NaN,
+          "Max_Iter": NaN
+        },
+        {
+          "Model": "Hypertension",
+          "Algorithm": "LogisticRegression",
+          "Scaler": "StandardScaler",
+          "Features": 12,
+          "Classes": 2,
+          "N_Estimators": NaN,
+          "Learning_Rate": NaN,
+          "Max_Depth": NaN,
+          "C": 1.0,
+          "Solver": "lbfgs",
+          "Max_Iter": 100.0
+        }
+      ]
+    },
+    "detailed_comparison": {},
+    "recommendations": {}
+  },
+  "performance_metrics": {
+    "diabetes": {
+      "accuracy": 0.9415584415584416,
+      "precision": 0.9411764705882353,
+      "recall": 0.8888888888888888,
+      "f1_score": 0.9142857142857143,
+      "auc_roc": 0.9878703703703704,
+      "test_size": 154,
+      "positive_class_ratio": 0.35064935064935066
+    },
+    "heart": {
+      "accuracy": 0.9672131147540983,
+      "precision": 0.9428571428571428,
+      "recall": 1.0,
+      "f1_score": 0.9705882352941176,
+      "auc_roc": 0.9761904761904762,
+      "test_size": 61,
+      "positive_class_ratio": 0.5409836065573771
+    },
+    "hypertension": {
+      "accuracy": 0.8681757656458056,
+      "precision": 0.8026905829596412,
+      "recall": 0.7649572649572649,
+      "f1_score": 0.7833698030634574,
+      "auc_roc": 0.9406999619765577,
+      "test_size": 751,
+      "positive_class_ratio": 0.31158455392809586
+    }
+  },
+  "performance_comparison_table": [
+    {
+      "Model": "Diabetes",
+      "Algorithm": "RandomForestClassifier",
+      "Accuracy": "0.9416",
+      "Precision": "0.9412",
+      "Recall": "0.8889",
+      "F1-Score": "0.9143",
+      "AUC-ROC": "0.9879",
+      "Test_Size": 154
+    },
+    {
+      "Model": "Heart",
+      "Algorithm": "XGBClassifier",
+      "Accuracy": "0.9672",
+      "Precision": "0.9429",
+      "Recall": "1.0000",
+      "F1-Score": "0.9706",
+      "AUC-ROC": "0.9762",
+      "Test_Size": 61
+    },
+    {
+      "Model": "Hypertension",
+      "Algorithm": "LogisticRegression",
+      "Accuracy": "0.8682",
+      "Precision": "0.8027",
+      "Recall": "0.7650",
+      "F1-Score": "0.7834",
+      "AUC-ROC": "0.9407",
+      "Test_Size": 751
+    }
+  ]
+}

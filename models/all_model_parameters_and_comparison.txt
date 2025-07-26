@@ -1,0 +1,221 @@
+COMPREHENSIVE MODEL ANALYSIS REPORT
+================================================================================
+Generated on: 2025-07-26 15:24:15
+================================================================================
+
+MODEL COMPARISON SUMMARY
+----------------------------------------
+       Model              Algorithm         Scaler  Features  Classes N_Estimators Learning_Rate Max_Depth   C Solver  Max_Iter
+    Diabetes RandomForestClassifier StandardScaler         8        2          NaN           NaN       NaN NaN    NaN       NaN
+       Heart          XGBClassifier StandardScaler        13        2          N/A           N/A       N/A NaN    NaN       NaN
+Hypertension     LogisticRegression StandardScaler        12        2          NaN           NaN       NaN 1.0  lbfgs     100.0
+
+Total Models: 3
+Algorithms Used: RandomForestClassifier, XGBClassifier, LogisticRegression
+Feature Count Range: 8 to 13
+
+================================================================================
+MODEL PERFORMANCE COMPARISON
+================================================================================
+       Model              Algorithm Accuracy Precision Recall F1-Score AUC-ROC  Test_Size
+    Diabetes RandomForestClassifier   0.9416    0.9412 0.8889   0.9143  0.9879        154
+       Heart          XGBClassifier   0.9672    0.9429 1.0000   0.9706  0.9762         61
+Hypertension     LogisticRegression   0.8682    0.8027 0.7650   0.7834  0.9407        751
+
+PERFORMANCE INSIGHTS:
+Best Accuracy: Heart (0.9672)
+Best Precision: Heart (0.9429)
+Best Recall: Heart (1.0000)
+Best F1-Score: Heart (0.9706)
+
+Average Performance:
+Mean Accuracy: 0.9257
+Mean Precision: 0.8956
+Mean Recall: 0.8846
+Mean F1-Score: 0.8894
+
+================================================================================
+DETAILED MODEL PARAMETERS
+================================================================================
+
+==================== DIABETES MODEL ====================
+Model Type: RandomForestClassifier
+Scaler Type: StandardScaler
+Purpose: Diabetes risk prediction and management
+Complexity: Unknown
+Interpretability: Medium - Feature importance available
+
+--- MODEL PARAMETERS ---
+bootstrap: True
+ccp_alpha: 0.0
+class_weight: None
+criterion: gini
+max_depth: None
+max_features: sqrt
+max_leaf_nodes: None
+max_samples: None
+min_impurity_decrease: 0.0
+min_samples_leaf: 1
+min_samples_split: 2
+min_weight_fraction_leaf: 0.0
+monotonic_cst: None
+n_estimators: 100
+n_jobs: None
+oob_score: False
+random_state: 42
+verbose: 0
+warm_start: False
+
+--- MODEL ATTRIBUTES ---
+n_features_in: 8
+classes: [0.0, 1.0]
+feature_importances: 8 importances (sum: 1.0000)
+n_estimators: 100
+
+--- SCALER PARAMETERS ---
+copy: True
+with_mean: True
+with_std: True
+
+--- SCALER ATTRIBUTES ---
+mean: 8 values (mean: 48.2548, std: 40.7602)
+scale: 8 values (mean: 22.4414, std: 32.5003)
+variance: 8 values (mean: 1559.8820, std: 3626.6983)
+n_features_in: 8
+
+------------------------------------------------------------
+
+==================== HEART MODEL ====================
+Model Type: XGBClassifier
+Scaler Type: StandardScaler
+Purpose: Cardiovascular disease risk assessment
+Complexity: Medium - Standard ensemble size
+Interpretability: Medium - Feature importance available
+
+--- MODEL PARAMETERS ---
+objective: binary:logistic
+base_score: None
+booster: None
+callbacks: None
+colsample_bylevel: None
+colsample_bynode: None
+colsample_bytree: None
+device: None
+early_stopping_rounds: None
+enable_categorical: False
+eval_metric: logloss
+feature_types: None
+feature_weights: None
+gamma: None
+grow_policy: None
+importance_type: None
+interaction_constraints: None
+learning_rate: None
+max_bin: None
+max_cat_threshold: None
+max_cat_to_onehot: None
+max_delta_step: None
+max_depth: None
+max_leaves: None
+min_child_weight: None
+missing: nan
+monotone_constraints: None
+multi_strategy: None
+n_estimators: None
+n_jobs: None
+num_parallel_tree: None
+random_state: 42
+reg_alpha: None
+reg_lambda: None
+sampling_method: None
+scale_pos_weight: None
+subsample: None
+tree_method: None
+validate_parameters: None
+verbosity: None
+use_label_encoder: False
+
+--- MODEL ATTRIBUTES ---
+intercept: [0.5495867729187012]
+n_features_in: 13
+classes: [0, 1]
+feature_importances: 13 importances (sum: 1.0000)
+n_estimators: None
+
+--- SCALER PARAMETERS ---
+copy: True
+with_mean: True
+with_std: True
+
+--- SCALER ATTRIBUTES ---
+mean: 13 values (mean: 45.3874, std: 76.7369)
+scale: 13 values (mean: 8.2647, std: 14.4284)
+variance: 13 values (mean: 276.4844, std: 709.8078)
+n_features_in: 13
+
+------------------------------------------------------------
+
+==================== HYPERTENSION MODEL ====================
+Model Type: LogisticRegression
+Scaler Type: StandardScaler
+Purpose: Blood pressure and hypertension risk evaluation
+Complexity: Low - Linear model with few parameters
+Interpretability: High - Clear coefficient interpretation
+
+--- MODEL PARAMETERS ---
+C: 1.0
+class_weight: None
+dual: False
+fit_intercept: True
+intercept_scaling: 1
+l1_ratio: None
+max_iter: 100
+multi_class: deprecated
+n_jobs: None
+penalty: l2
+random_state: 42
+solver: lbfgs
+tol: 0.0001
+verbose: 0
+warm_start: False
+
+--- MODEL ATTRIBUTES ---
+coefficients: [[0.2527219583546423, 0.21879307311275792, -0.08337022686573901, 0.02582341625398102, 1.199471322077315, 0.02712201295024664, -0.012911386040464237, 2.4632923742246, 1.0394544364038223, 0.3109805216225227, 0.1559747060687272, 0.011077051351232204]]
+intercept: [-1.3605160440639386]
+n_features_in: 12
+classes: [0, 1]
+
+--- SCALER PARAMETERS ---
+copy: True
+with_mean: True
+with_std: True
+
+--- SCALER ATTRIBUTES ---
+mean: 12 values (mean: 57.9334, std: 68.2522)
+scale: 12 values (mean: 11.6919, std: 12.6601)
+variance: 12 values (mean: 296.9782, std: 542.2355)
+n_features_in: 12
+
+------------------------------------------------------------
+
+================================================================================
+MODEL RECOMMENDATIONS
+================================================================================
+
+Model Selection Guidelines:
+- For maximum interpretability: Use Logistic Regression models
+- For highest accuracy: Use XGBoost models
+- For fast inference: Logistic Regression models
+- For handling complex patterns: XGBoost models
+
+Performance-Based Recommendations:
+- Overall best performer: Heart (Accuracy: 0.9672)
+- Most balanced model: Hypertension (Precision: 0.8027, Recall: 0.7650)
+
+Deployment Considerations:
+- All models require their respective scalers for preprocessing
+- Ensure feature names and order match training data
+- Consider model size and inference speed for production
+- Regularly retrain models with new data
+- Monitor performance metrics in production environment
+- Consider ensemble methods for improved performance
