@@ -4,6 +4,7 @@ import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Upload, FileText, AlertCircle, CheckCircle } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { MedicalDocumentAnalyzer } from '@/lib/medical-analyzer';
 
 interface FileUploadProps {
   onFileAnalyzed?: (analysis: string) => void; // Made optional for backward compatibility
@@ -71,17 +72,12 @@ export const FileUpload = ({ onFileAnalyzed }: FileUploadProps) => {
   const analyzeFile = async (file: File) => {
     setIsAnalyzing(true);
     
-    // Simulate file analysis
-    setTimeout(() => {
-      const analysisResults = [
-        "Based on your lab report, I can see the following key findings:\n\n✓ Blood glucose levels are within normal range (95 mg/dL)\n✓ Cholesterol levels appear slightly elevated (220 mg/dL)\n✓ Blood pressure readings are normal\n\nRecommendations:\n• Consider dietary modifications to reduce cholesterol\n• Regular cardiovascular exercise\n• Follow up with your healthcare provider",
-        
-        "Your medical report shows:\n\n✓ Complete Blood Count (CBC) - Normal ranges\n✓ Liver function tests - All within normal limits\n✓ Kidney function - Excellent\n\nOverall assessment indicates good health status. Continue current lifestyle habits and maintain regular check-ups.",
-        
-        "Report analysis reveals:\n\n⚠️ Slightly elevated blood pressure (138/88 mmHg)\n✓ Normal heart rate and rhythm\n✓ Good overall cardiovascular markers\n\nSuggestions:\n• Monitor sodium intake\n• Increase physical activity\n• Consider stress management techniques"
-      ];
+    try {
+      // Initialize the medical document analyzer
+      const analyzer = new MedicalDocumentAnalyzer();
       
-      const randomAnalysis = analysisResults[Math.floor(Math.random() * analysisResults.length)];
+      // Analyze the document
+      const result = await analyzer.analyzeDocument(file);
       
       setIsAnalyzing(false);
       
@@ -98,9 +94,12 @@ export const FileUpload = ({ onFileAnalyzed }: FileUploadProps) => {
       const reportData = {
         fileName: file.name,
         uploadDate: new Date().toLocaleString(),
-        analysis: randomAnalysis,
+        analysis: result.analysis,
         fileType: file.type,
-        fileSize: formatFileSize(file.size)
+        fileSize: formatFileSize(file.size),
+        documentType: result.documentType,
+        confidence: result.confidence,
+        extractedText: result.extractedText
       };
       
       // Navigate to medical report page with data
@@ -108,14 +107,28 @@ export const FileUpload = ({ onFileAnalyzed }: FileUploadProps) => {
       
       // Keep backward compatibility
       if (onFileAnalyzed) {
-        onFileAnalyzed(randomAnalysis);
+        onFileAnalyzed(result.analysis);
       }
       
       toast({
         title: "Analysis Complete",
-        description: "Your medical report has been analyzed successfully.",
+        description: `Your ${result.documentType.toUpperCase()} file has been analyzed successfully. Confidence: ${Math.round(result.confidence * 100)}%`,
       });
-    }, 3000);
+      
+    } catch (error) {
+      setIsAnalyzing(false);
+      console.error('Analysis error:', error);
+      
+      const errorMessage = error && typeof error === 'object' && 'message' in error 
+        ? (error as any).message 
+        : 'Failed to analyze the document';
+      
+      toast({
+        title: "Analysis Failed",
+        description: errorMessage,
+        variant: "destructive",
+      });
+    }
   };
 
   return (
@@ -144,6 +157,8 @@ export const FileUpload = ({ onFileAnalyzed }: FileUploadProps) => {
           onChange={handleChange}
           className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
           disabled={isAnalyzing}
+          aria-label="Upload medical report file"
+          title="Upload medical report file"
         />
         
         <div className="flex flex-col items-center space-y-4">

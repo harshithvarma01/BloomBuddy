@@ -12,6 +12,9 @@ interface MedicalReportData {
   analysis: string;
   fileType: string;
   fileSize: string;
+  documentType?: 'pdf' | 'image' | 'unknown';
+  confidence?: number;
+  extractedText?: string;
 }
 
 export default function MedicalReport() {
@@ -242,7 +245,18 @@ This analysis is for informational purposes only and should not replace professi
                   </div>
                   <div className="flex justify-between items-center">
                     <span className="text-muted-foreground font-medium">Type:</span>
-                    <span className="text-foreground font-mono text-xs bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">{reportData.fileType}</span>
+                    <div className="flex items-center gap-2">
+                      <span className="text-foreground font-mono text-xs bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">{reportData.fileType}</span>
+                      {reportData.documentType && (
+                        <span className={`text-xs px-2 py-1 rounded ${
+                          reportData.documentType === 'pdf' ? 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200' :
+                          reportData.documentType === 'image' ? 'bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200' :
+                          'bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200'
+                        }`}>
+                          {reportData.documentType.toUpperCase()}
+                        </span>
+                      )}
+                    </div>
                   </div>
                   <div className="flex justify-between items-center">
                     <span className="text-muted-foreground font-medium">Size:</span>
@@ -257,6 +271,18 @@ This analysis is for informational purposes only and should not replace professi
                       <span className="text-foreground font-medium text-xs">BloomBuddy AI</span>
                     </div>
                   </div>
+                  {reportData.confidence && (
+                    <div className="flex justify-between items-center pt-2">
+                      <span className="text-muted-foreground font-medium">Confidence:</span>
+                      <div className="flex items-center gap-2">
+                        <div className={`w-2 h-2 rounded-full ${
+                          reportData.confidence > 0.7 ? 'bg-green-500' : 
+                          reportData.confidence > 0.5 ? 'bg-yellow-500' : 'bg-red-500'
+                        }`}></div>
+                        <span className="text-foreground text-xs">{Math.round(reportData.confidence * 100)}%</span>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </Card>
               
