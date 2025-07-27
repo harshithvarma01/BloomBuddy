@@ -15,10 +15,10 @@ BloomBuddy is a comprehensive AI-powered health companion application that provi
 *Conversational AI with multiple LLM providers and contextual health discussions*
 
 ### 📊 Health Risk Assessment
-![Risk Assessment Form](./docs/images/form.png)
+![Risk Assessment Form](./docs/images/risk-assessment-demo.png)
 *Select your health assessment category: Heart Disease, Hypertension, Diabetes, or upload medical reports for comprehensive analysis*
 
-![Risk Assessment Results](./docs/images/risk-assessment-results-demo.png)
+![Risk Assessment Results](./docs/images/form.png)
 *Detailed health questionnaire with medical parameters including age, blood pressure, cholesterol, ECG results, and cardiovascular indicators*
 
 ### 📋 Assessment Results
