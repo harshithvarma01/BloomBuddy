@@ -45,12 +45,12 @@ export const FileUpload = ({ onFileAnalyzed }: FileUploadProps) => {
   };
 
   const handleFiles = (file: File) => {
-    const allowedTypes = ['application/pdf', 'image/jpeg', 'image/png', 'image/jpg'];
+    const allowedTypes = ['application/pdf'];
     
     if (!allowedTypes.includes(file.type)) {
       toast({
         title: "Invalid file type",
-        description: "Please upload a PDF, JPG, or PNG file.",
+        description: "Please upload a PDFfile.",
         variant: "destructive",
       });
       return;

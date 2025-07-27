@@ -4,7 +4,7 @@ import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Progress } from '@/components/ui/progress';
-import { Download, AlertCircle, CheckCircle, Heart, Shield, TrendingUp, Activity } from 'lucide-react';
+import { Download, AlertCircle, CheckCircle, Heart, Shield, TrendingUp, Activity, MessageCircle } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { mlPredictionService, type MLPredictionInput, type EnhancedPredictionResult } from '@/lib/ml-prediction-service';
 
@@ -23,35 +23,86 @@ interface FormField {
 
 const diseaseFields: Record<string, FormField[]> = {
   diabetes: [
-    { id: 'glucose', label: 'Glucose Level', type: 'number', placeholder: '100', unit: 'mg/dL' },
-    { id: 'bmi', label: 'BMI', type: 'number', placeholder: '25.0', unit: 'kg/m²' },
-    { id: 'age', label: 'Age', type: 'number', placeholder: '35', unit: 'years' },
     { id: 'pregnancies', label: 'Pregnancies', type: 'number', placeholder: '0', unit: 'times' },
-    { id: 'bloodPressure', label: 'Blood Pressure', type: 'number', placeholder: '80', unit: 'mmHg' },
-    { id: 'insulin', label: 'Insulin', type: 'number', placeholder: '85', unit: 'mu U/ml' }
+    { id: 'glucose', label: 'Glucose Level', type: 'number', placeholder: '120', unit: 'mg/dL' },
+    { id: 'bloodPressure', label: 'Blood Pressure (Diastolic)', type: 'number', placeholder: '70', unit: 'mmHg' },
+    { id: 'skinThickness', label: 'Skin Thickness', type: 'number', placeholder: '20', unit: 'mm' },
+    { id: 'insulin', label: 'Insulin Level', type: 'number', placeholder: '80', unit: 'mu U/ml' },
+    { id: 'bmi', label: 'BMI', type: 'number', placeholder: '25.0', unit: 'kg/m²' },
+    { id: 'diabetesPedigreeFunction', label: 'Diabetes Pedigree Function', type: 'number', placeholder: '0.5', unit: 'score' },
+    { id: 'age', label: 'Age', type: 'number', placeholder: '35', unit: 'years' }
   ],
   heart: [
     { id: 'age', label: 'Age', type: 'number', placeholder: '45', unit: 'years' },
-    { id: 'cholesterol', label: 'Cholesterol', type: 'number', placeholder: '200', unit: 'mg/dL' },
-    { id: 'bloodPressure', label: 'Blood Pressure (Systolic)', type: 'number', placeholder: '120', unit: 'mmHg' },
-    { id: 'heartRate', label: 'Max Heart Rate', type: 'number', placeholder: '150', unit: 'bpm' },
+    { id: 'sex', label: 'Sex', type: 'select', options: [
+      { value: '0', label: 'Female' },
+      { value: '1', label: 'Male' }
+    ]},
     { id: 'chestPain', label: 'Chest Pain Type', type: 'select', options: [
       { value: '0', label: 'Typical Angina' },
       { value: '1', label: 'Atypical Angina' },
       { value: '2', label: 'Non-anginal Pain' },
       { value: '3', label: 'Asymptomatic' }
+    ]},
+    { id: 'restingBP', label: 'Resting Blood Pressure', type: 'number', placeholder: '120', unit: 'mmHg' },
+    { id: 'cholesterol', label: 'Cholesterol', type: 'number', placeholder: '200', unit: 'mg/dL' },
+    { id: 'fastingBS', label: 'Fasting Blood Sugar > 120 mg/dl', type: 'select', options: [
+      { value: '0', label: 'No' },
+      { value: '1', label: 'Yes' }
+    ]},
+    { id: 'restingECG', label: 'Resting ECG', type: 'select', options: [
+      { value: '0', label: 'Normal' },
+      { value: '1', label: 'ST-T wave abnormality' },
+      { value: '2', label: 'Left ventricular hypertrophy' }
+    ]},
+    { id: 'maxHeartRate', label: 'Max Heart Rate Achieved', type: 'number', placeholder: '150', unit: 'bpm' },
+    { id: 'exerciseAngina', label: 'Exercise Induced Angina', type: 'select', options: [
+      { value: '0', label: 'No' },
+      { value: '1', label: 'Yes' }
+    ]},
+    { id: 'oldpeak', label: 'ST Depression (Oldpeak)', type: 'number', placeholder: '1.0', unit: 'depression' },
+    { id: 'slope', label: 'Peak Exercise ST Slope', type: 'select', options: [
+      { value: '0', label: 'Upsloping' },
+      { value: '1', label: 'Flat' },
+      { value: '2', label: 'Downsloping' }
+    ]},
+    { id: 'ca', label: 'Major Vessels (0-3)', type: 'select', options: [
+      { value: '0', label: '0 vessels' },
+      { value: '1', label: '1 vessel' },
+      { value: '2', label: '2 vessels' },
+      { value: '3', label: '3 vessels' }
+    ]},
+    { id: 'thal', label: 'Thalassemia', type: 'select', options: [
+      { value: '1', label: 'Normal' },
+      { value: '2', label: 'Fixed Defect' },
+      { value: '3', label: 'Reversible Defect' }
     ]}
   ],
   hypertension: [
+    { id: 'sex', label: 'Sex', type: 'select', options: [
+      { value: '0', label: 'Female' },
+      { value: '1', label: 'Male' }
+    ]},
     { id: 'age', label: 'Age', type: 'number', placeholder: '40', unit: 'years' },
-    { id: 'systolic', label: 'Systolic BP', type: 'number', placeholder: '130', unit: 'mmHg' },
-    { id: 'diastolic', label: 'Diastolic BP', type: 'number', placeholder: '85', unit: 'mmHg' },
-    { id: 'bmi', label: 'BMI', type: 'number', placeholder: '28.0', unit: 'kg/m²' },
-    { id: 'smoking', label: 'Smoking Status', type: 'select', options: [
-      { value: '0', label: 'Non-smoker' },
-      { value: '1', label: 'Former smoker' },
-      { value: '2', label: 'Current smoker' }
-    ]}
+    { id: 'currentSmoker', label: 'Current Smoker', type: 'select', options: [
+      { value: '0', label: 'No' },
+      { value: '1', label: 'Yes' }
+    ]},
+    { id: 'cigsPerDay', label: 'Cigarettes Per Day', type: 'number', placeholder: '0', unit: 'cigarettes' },
+    { id: 'BPMeds', label: 'Blood Pressure Medication', type: 'select', options: [
+      { value: '0', label: 'No' },
+      { value: '1', label: 'Yes' }
+    ]},
+    { id: 'diabetes', label: 'Diabetes', type: 'select', options: [
+      { value: '0', label: 'No' },
+      { value: '1', label: 'Yes' }
+    ]},
+    { id: 'totChol', label: 'Total Cholesterol', type: 'number', placeholder: '200', unit: 'mg/dL' },
+    { id: 'sysBP', label: 'Systolic Blood Pressure', type: 'number', placeholder: '120', unit: 'mmHg' },
+    { id: 'diaBP', label: 'Diastolic Blood Pressure', type: 'number', placeholder: '80', unit: 'mmHg' },
+    { id: 'bmi', label: 'BMI', type: 'number', placeholder: '25.0', unit: 'kg/m²' },
+    { id: 'heartRate', label: 'Heart Rate', type: 'number', placeholder: '70', unit: 'bpm' },
+    { id: 'glucose', label: 'Glucose Level', type: 'number', placeholder: '85', unit: 'mg/dL' }
   ]
 };
 
@@ -80,26 +131,45 @@ export const PredictionForm = ({ disease }: PredictionFormProps) => {
     // Map form fields to ML input based on disease type
     switch (disease) {
       case 'diabetes':
-        input.glucose = parseInt(formData.glucose) || 0;
-        input.bmi = parseFloat(formData.bmi) || 0;
+        // Diabetes model expects: [Pregnancies, Glucose, BloodPressure, SkinThickness, Insulin, BMI, DiabetesPedigreeFunction, Age]
         input.pregnancies = parseInt(formData.pregnancies) || 0;
+        input.glucose = parseInt(formData.glucose) || 0;
         input.bloodPressure = parseInt(formData.bloodPressure) || 0;
+        input.skinThickness = parseInt(formData.skinThickness) || 0;
         input.insulin = parseInt(formData.insulin) || 0;
+        input.bmi = parseFloat(formData.bmi) || 0;
+        input.diabetesPedigreeFunction = parseFloat(formData.diabetesPedigreeFunction) || 0;
         break;
         
       case 'heart':
-        input.cholesterol = parseInt(formData.cholesterol) || 0;
-        input.maxHR = parseInt(formData.heartRate) || 0;
-        input.restingBP = parseInt(formData.bloodPressure) || 0;
+        // Heart model expects: [age, sex, cp, trestbps, chol, fbs, restecg, thalach, exang, oldpeak, slope, ca, thal]
+        input.sex = parseInt(formData.sex) || 0;
         input.chestPainType = parseInt(formData.chestPain) || 0;
-        input.sex = 1; // Default to male, you might want to add this field
+        input.restingBP = parseInt(formData.restingBP) || 0;
+        input.cholesterol = parseInt(formData.cholesterol) || 0;
+        input.fastingBS = parseInt(formData.fastingBS) || 0;
+        input.restingECG = parseInt(formData.restingECG) || 0;
+        input.maxHR = parseInt(formData.maxHeartRate) || 0;
+        input.exerciseAngina = parseInt(formData.exerciseAngina) || 0;
+        input.oldpeak = parseFloat(formData.oldpeak) || 0;
+        input.stSlope = parseInt(formData.slope) || 0;
+        input.ca = parseInt(formData.ca) || 0;
+        input.thal = parseInt(formData.thal) || 1;
         break;
         
       case 'hypertension':
-        input.systolicBP = parseInt(formData.systolic) || 0;
-        input.diastolicBP = parseInt(formData.diastolic) || 0;
+        // Hypertension model expects: [male, age, currentSmoker, cigsPerDay, BPMeds, diabetes, totChol, sysBP, diaBP, BMI, heartRate, glucose]
+        input.sex = parseInt(formData.sex) || 0;
+        input.smoking = parseInt(formData.currentSmoker) || 0;
+        input.cigsPerDay = parseInt(formData.cigsPerDay) || 0;
+        input.BPMeds = parseInt(formData.BPMeds) || 0;
+        input.diabetes = parseInt(formData.diabetes) || 0;
+        input.totChol = parseInt(formData.totChol) || 0;
+        input.systolicBP = parseInt(formData.sysBP) || 0;
+        input.diastolicBP = parseInt(formData.diaBP) || 0;
         input.bmi = parseFloat(formData.bmi) || 0;
-        input.smoking = parseInt(formData.smoking) || 0;
+        input.heartRate = parseInt(formData.heartRate) || 0;
+        input.glucose = parseInt(formData.glucose) || 0;
         break;
     }
 
@@ -225,6 +295,25 @@ export const PredictionForm = ({ disease }: PredictionFormProps) => {
       case 'High': return 'text-red-600';
       default: return 'text-gray-600';
     }
+  };
+
+  const navigateToChat = () => {
+    // Store the result in sessionStorage for the chat interface to access
+    if (result) {
+      sessionStorage.setItem('healthAssessmentResult', JSON.stringify({
+        disease: diseaseNames[disease],
+        result: result,
+        timestamp: new Date().toISOString()
+      }));
+    }
+    
+    // Navigate to chat page
+    window.location.href = '/chat';
+    
+    toast({
+      title: "Redirecting to Chat",
+      description: "You can now discuss your health report with our AI assistant.",
+    });
   };
 
   return (
@@ -482,6 +571,13 @@ export const PredictionForm = ({ disease }: PredictionFormProps) => {
               >
                 <Download className="w-4 h-4 mr-2" />
                 Download Comprehensive Report
+              </Button>
+              <Button
+                onClick={navigateToChat}
+                className="flex-1 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white transition-all duration-300"
+              >
+                <MessageCircle className="w-4 h-4 mr-2" />
+                Chat About Report
               </Button>
               <Button
                 variant="outline"

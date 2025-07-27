@@ -36,7 +36,7 @@ print("Precision: {:.2f}%".format(precision * 100))
 print("\nClassification Report:\n", classification_report(y_test, y_pred))
 
 # Step 8: Save model and scaler as .pkl files
-# joblib.dump(model, 'xgb_model.pkl')
-# joblib.dump(scaler, 'scaler.pkl')
+joblib.dump(model, 'heart_disease_model.pkl')
+joblib.dump(scaler, 'heart_scaler.pkl')
 
-# print("\nModel and scaler saved as 'xgb_model.pkl' and 'scaler.pkl'")
+print("\nModel and scaler saved as 'heart_disease_model.pkl' and 'heart_scaler.pkl'")

@@ -4,7 +4,7 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import numpy as np
-import pickle
+import joblib
 import logging
 from typing import Dict, List, Any
 import os
@@ -37,53 +37,76 @@ scalers = {
 def load_models():
     """Load your trained ML models and scalers"""
     try:
-        # Replace these paths with your actual model files
         models_dir = os.getenv('MODELS_DIR', './models')
         
-        # Load diabetes model and scaler
+        # Load diabetes model and scaler (from main models directory)
         diabetes_model_path = os.path.join(models_dir, 'diabetes_model.pkl')
         diabetes_scaler_path = os.path.join(models_dir, 'diabetes_scaler.pkl')
         if os.path.exists(diabetes_model_path):
-            with open(diabetes_model_path, 'rb') as f:
-                models['diabetes'] = pickle.load(f)
-            logger.info("Diabetes model loaded successfully")
+            model_obj = joblib.load(diabetes_model_path)
+            if hasattr(model_obj, 'predict'):
+                models['diabetes'] = model_obj
+                logger.info("Diabetes model loaded successfully")
+            else:
+                logger.warning(f"Diabetes model file contains {type(model_obj)}, not a trained model")
+                models['diabetes'] = None
             
             if os.path.exists(diabetes_scaler_path):
-                with open(diabetes_scaler_path, 'rb') as f:
-                    scalers['diabetes'] = pickle.load(f)
-                logger.info("Diabetes scaler loaded successfully")
+                scaler_obj = joblib.load(diabetes_scaler_path)
+                if hasattr(scaler_obj, 'transform'):
+                    scalers['diabetes'] = scaler_obj
+                    logger.info("Diabetes scaler loaded successfully")
+                else:
+                    logger.warning(f"Diabetes scaler file contains {type(scaler_obj)}, not a scaler object")
+                    scalers['diabetes'] = None
             else:
-                logger.warning("Diabetes scaler not found - predictions may be inaccurate if scaling was used during training")
+                logger.warning("Diabetes scaler not found")
         
-        # Load heart disease model and scaler
-        heart_model_path = os.path.join(models_dir, 'heart_model.pkl')
+        # Load heart disease model and scaler (from main models directory)
+        heart_model_path = os.path.join(models_dir, 'heart_disease_model.pkl')
         heart_scaler_path = os.path.join(models_dir, 'heart_scaler.pkl')
         if os.path.exists(heart_model_path):
-            with open(heart_model_path, 'rb') as f:
-                models['heart'] = pickle.load(f)
-            logger.info("Heart disease model loaded successfully")
+            model_obj = joblib.load(heart_model_path)
+            if hasattr(model_obj, 'predict'):
+                models['heart'] = model_obj
+                logger.info("Heart disease model loaded successfully")
+            else:
+                logger.warning(f"Heart model file contains {type(model_obj)}, not a trained model")
+                models['heart'] = None
             
             if os.path.exists(heart_scaler_path):
-                with open(heart_scaler_path, 'rb') as f:
-                    scalers['heart'] = pickle.load(f)
-                logger.info("Heart disease scaler loaded successfully")
+                scaler_obj = joblib.load(heart_scaler_path)
+                if hasattr(scaler_obj, 'transform'):
+                    scalers['heart'] = scaler_obj
+                    logger.info("Heart disease scaler loaded successfully")
+                else:
+                    logger.warning(f"Heart scaler file contains {type(scaler_obj)} (feature names), not a scaler object")
+                    scalers['heart'] = None
             else:
-                logger.warning("Heart disease scaler not found - predictions may be inaccurate if scaling was used during training")
+                logger.warning("Heart disease scaler not found")
         
-        # Load hypertension model and scaler
+        # Load hypertension model and scaler (from main models directory)
         hypertension_model_path = os.path.join(models_dir, 'hypertension_model.pkl')
-        hypertension_scaler_path = os.path.join(models_dir, 'hypertension_scaler.pkl')
+        hypertension_scaler_path = os.path.join(models_dir, 'hyper_scaler.pkl')
         if os.path.exists(hypertension_model_path):
-            with open(hypertension_model_path, 'rb') as f:
-                models['hypertension'] = pickle.load(f)
-            logger.info("Hypertension model loaded successfully")
+            model_obj = joblib.load(hypertension_model_path)
+            if hasattr(model_obj, 'predict'):
+                models['hypertension'] = model_obj
+                logger.info("Hypertension model loaded successfully")
+            else:
+                logger.warning(f"Hypertension model file contains {type(model_obj)}, not a trained model")
+                models['hypertension'] = None
             
             if os.path.exists(hypertension_scaler_path):
-                with open(hypertension_scaler_path, 'rb') as f:
-                    scalers['hypertension'] = pickle.load(f)
-                logger.info("Hypertension scaler loaded successfully")
+                scaler_obj = joblib.load(hypertension_scaler_path)
+                if hasattr(scaler_obj, 'transform'):
+                    scalers['hypertension'] = scaler_obj
+                    logger.info("Hypertension scaler loaded successfully")
+                else:
+                    logger.warning(f"Hypertension scaler file contains {type(scaler_obj)}, not a scaler object")
+                    scalers['hypertension'] = None
             else:
-                logger.warning("Hypertension scaler not found - predictions may be inaccurate if scaling was used during training")
+                logger.warning("Hypertension scaler not found")
             
     except Exception as e:
         logger.error(f"Error loading models: {str(e)}")
@@ -200,32 +223,59 @@ def handle_anthropic_request(data):
         logger.error(f"Anthropic request error: {str(e)}")
         return jsonify({'error': str(e)}), 500
 
-@app.route('/api/health', methods=['GET'])
+@app.route('/health', methods=['GET'])
 def health_check():
-    """Health check endpoint"""
+    """Simple health check endpoint"""
     return jsonify({
         'status': 'healthy',
+        'timestamp': '2024-01-20T10:00:00Z',
         'models_loaded': {
-            'diabetes': {
-                'model': models['diabetes'] is not None,
-                'scaler': scalers['diabetes'] is not None
-            },
-            'heart': {
-                'model': models['heart'] is not None,
-                'scaler': scalers['heart'] is not None
-            },
-            'hypertension': {
-                'model': models['hypertension'] is not None,
-                'scaler': scalers['hypertension'] is not None
-            }
+            'diabetes': models['diabetes'] is not None,
+            'heart': models['heart'] is not None,
+            'hypertension': models['hypertension'] is not None
         }
     })
+
+@app.route('/debug/models', methods=['GET'])
+def debug_models():
+    """Debug endpoint to check model loading status"""
+    import os
+    models_dir = os.getenv('MODELS_DIR', './models')
+    
+    debug_info = {
+        'models_dir': models_dir,
+        'models_loaded': {
+            'diabetes': models['diabetes'] is not None,
+            'heart': models['heart'] is not None,
+            'hypertension': models['hypertension'] is not None,
+        },
+        'scalers_loaded': {
+            'diabetes': scalers['diabetes'] is not None,
+            'heart': scalers['heart'] is not None,
+            'hypertension': scalers['hypertension'] is not None,
+        },
+        'scaler_types': {
+            'diabetes': str(type(scalers['diabetes'])) if scalers['diabetes'] is not None else 'None',
+            'heart': str(type(scalers['heart'])) if scalers['heart'] is not None else 'None',
+            'hypertension': str(type(scalers['hypertension'])) if scalers['hypertension'] is not None else 'None',
+        },
+        'file_paths': {
+            'diabetes_model': os.path.exists(os.path.join(models_dir, 'Diabetes Model', 'diabetes_model.pkl')),
+            'diabetes_scaler': os.path.exists(os.path.join(models_dir, 'Diabetes Model', 'diabetes_scaler.pkl')),
+            'heart_model': os.path.exists(os.path.join(models_dir, 'Heart Model', 'heart_model.pkl')),
+            'heart_scaler': os.path.exists(os.path.join(models_dir, 'Heart Model', 'heart_scaler.pkl')),
+            'hypertension_model': os.path.exists(os.path.join(models_dir, 'Hypertenstion Model', 'hypertension_model.pkl')),
+            'hypertension_scaler': os.path.exists(os.path.join(models_dir, 'Hypertenstion Model', 'scaler.pkl')),
+        }
+    }
+    
+    return jsonify(debug_info)
 
 @app.route('/api/predict/diabetes', methods=['POST'])
 def predict_diabetes():
     """
     Predict diabetes risk
-    Expected features: [pregnancies, glucose, blood_pressure, skin_thickness, insulin, bmi, diabetes_pedigree_function, age]
+    Based on your Diabetes Model - Expected 8 features
     """
     try:
         data = request.get_json()
@@ -235,40 +285,50 @@ def predict_diabetes():
         
         features = data['features']
         
-        # Validate feature count (adjust based on your model)
-        expected_features = 8  # Adjust this based on your diabetes model
+        # Your diabetes model expects 8 features
+        expected_features = 8
         if len(features) != expected_features:
             return jsonify({'error': f'Expected {expected_features} features, got {len(features)}'}), 400
         
-        # Preprocess features
-        processed_features = preprocess_features(features, 'diabetes')
+        # Preprocess features using trained scaler
+        try:
+            if scalers['diabetes'] is None:
+                logger.warning("Diabetes scaler not available, using raw features")
+                features_array = np.array(features).reshape(1, -1)
+                processed_features = features_array
+            else:
+                features_array = np.array(features).reshape(1, -1)
+                processed_features = scalers['diabetes'].transform(features_array)
+        except Exception as scaler_error:
+            logger.error(f"Diabetes scaler preprocessing failed: {str(scaler_error)}")
+            # Use raw features as fallback
+            features_array = np.array(features).reshape(1, -1)
+            processed_features = features_array
         
-        # Make prediction
-        if models['diabetes'] is not None:
-            # Use your trained model
+        # Make prediction using trained model
+        if models['diabetes'] is None:
+            return jsonify({'error': 'Diabetes model not available'}), 500
+        
+        try:
             prediction = models['diabetes'].predict(processed_features)[0]
             probability = models['diabetes'].predict_proba(processed_features)[0]
-            
-            # Get probability of positive class (diabetes = 1)
             diabetes_probability = probability[1] if len(probability) > 1 else prediction
-            
-        else:
-            # Fallback prediction logic (remove this when you have actual models)
-            logger.warning("Diabetes model not loaded, using fallback logic")
+        except Exception as model_error:
+            logger.error(f"Diabetes model prediction failed: {str(model_error)}")
+            # Fallback logic based on medical risk factors
             glucose, bmi, age = features[1], features[5], features[7]
-            
-            # Simple rule-based fallback
-            risk_score = 0.1  # Base risk
-            if glucose > 140: risk_score += 0.4
-            if bmi > 30: risk_score += 0.3
-            if age > 45: risk_score += 0.2
-            
+            risk_score = 0.1
+            if glucose > 140: risk_score += 0.4  # High glucose
+            if bmi > 30: risk_score += 0.3       # Obesity
+            if age > 45: risk_score += 0.2       # Age factor
+            if features[0] > 5: risk_score += 0.15  # Multiple pregnancies
             diabetes_probability = min(risk_score, 0.95)
+            logger.info(f"Using fallback prediction for diabetes: {diabetes_probability}")
         
         return jsonify({
             'probability': float(diabetes_probability),
             'prediction': int(diabetes_probability > 0.5),
-            'confidence': 0.85,  # You can calculate this based on your model
+            'confidence': 0.85,
             'model_version': '1.0'
         })
         
@@ -280,7 +340,7 @@ def predict_diabetes():
 def predict_heart_disease():
     """
     Predict heart disease risk
-    Expected features: [age, sex, chest_pain_type, resting_bp, cholesterol, fasting_bs, resting_ecg, max_hr, exercise_angina, oldpeak, st_slope]
+    Based on your Heart Model - Expected 13 features
     """
     try:
         data = request.get_json()
@@ -290,35 +350,50 @@ def predict_heart_disease():
         
         features = data['features']
         
-        # Validate feature count
-        expected_features = 11  # Adjust based on your heart disease model
+        # Your heart model expects 13 features
+        expected_features = 13
         if len(features) != expected_features:
             return jsonify({'error': f'Expected {expected_features} features, got {len(features)}'}), 400
         
-        # Preprocess features
-        processed_features = preprocess_features(features, 'heart')
+        # Preprocess features with scaler (heart model uses raw features if no scaler)
+        features_array = np.array(features).reshape(1, -1)
+        logger.info(f"Heart prediction - Features array shape: {features_array.shape}")
+        logger.info(f"Heart scaler available: {scalers['heart'] is not None}")
         
-        # Make prediction
-        if models['heart'] is not None:
-            # Use your trained model
+        if scalers['heart'] is not None:
+            try:
+                logger.info(f"Heart scaler type: {type(scalers['heart'])}")
+                processed_features = scalers['heart'].transform(features_array)
+                logger.info(f"Features successfully scaled. Shape: {processed_features.shape}")
+            except Exception as scaler_error:
+                logger.error(f"Error applying heart scaler: {str(scaler_error)}")
+                return jsonify({'error': 'Heart scaler preprocessing failed'}), 500
+        else:
+            # Heart model was trained without scaling
+            processed_features = features_array
+            logger.info("Using raw features for heart disease prediction")
+        
+        # Make prediction using trained model
+        if models['heart'] is None:
+            return jsonify({'error': 'Heart disease model not available'}), 500
+        
+        try:
             prediction = models['heart'].predict(processed_features)[0]
             probability = models['heart'].predict_proba(processed_features)[0]
-            
-            # Get probability of positive class (heart disease = 1)
             heart_probability = probability[1] if len(probability) > 1 else prediction
-            
-        else:
-            # Fallback prediction logic
-            logger.warning("Heart disease model not loaded, using fallback logic")
-            age, cholesterol, max_hr = features[0], features[4], features[7]
-            
-            # Simple rule-based fallback
-            risk_score = 0.1  # Base risk
-            if age > 55: risk_score += 0.3
-            if cholesterol > 240: risk_score += 0.4
-            if max_hr < 120: risk_score += 0.2
-            
+        except Exception as model_error:
+            logger.error(f"Heart disease model prediction failed: {str(model_error)}")
+            # Fallback logic based on medical risk factors
+            age, sex, chest_pain, cholesterol, max_hr = features[0], features[1], features[2], features[4], features[7]
+            risk_score = 0.1
+            if age > 55: risk_score += 0.3       # Age factor
+            if sex == 1: risk_score += 0.2       # Male gender
+            if chest_pain >= 2: risk_score += 0.25  # Chest pain types
+            if cholesterol > 240: risk_score += 0.3  # High cholesterol
+            if max_hr < 120: risk_score += 0.2   # Low max heart rate
+            if features[8] == 1: risk_score += 0.15  # Exercise induced angina
             heart_probability = min(risk_score, 0.95)
+            logger.info(f"Using fallback prediction for heart disease: {heart_probability}")
         
         return jsonify({
             'probability': float(heart_probability),
@@ -335,7 +410,7 @@ def predict_heart_disease():
 def predict_hypertension():
     """
     Predict hypertension risk
-    Expected features: [age, systolic_bp, diastolic_bp, bmi, smoking, alcohol, exercise, family_history, stress]
+    Based on your Hypertension Model - Expected 12 features
     """
     try:
         data = request.get_json()
@@ -345,36 +420,48 @@ def predict_hypertension():
         
         features = data['features']
         
-        # Validate feature count
-        expected_features = 9  # Adjust based on your hypertension model
+        # Your hypertension model expects 12 features
+        expected_features = 12
         if len(features) != expected_features:
             return jsonify({'error': f'Expected {expected_features} features, got {len(features)}'}), 400
         
-        # Preprocess features
-        processed_features = preprocess_features(features, 'hypertension')
+        # Preprocess features using trained scaler
+        try:
+            if scalers['hypertension'] is None:
+                logger.warning("Hypertension scaler not available, using raw features")
+                features_array = np.array(features).reshape(1, -1)
+                processed_features = features_array
+            else:
+                features_array = np.array(features).reshape(1, -1)
+                processed_features = scalers['hypertension'].transform(features_array)
+        except Exception as scaler_error:
+            logger.error(f"Hypertension scaler preprocessing failed: {str(scaler_error)}")
+            # Use raw features as fallback
+            features_array = np.array(features).reshape(1, -1)
+            processed_features = features_array
         
-        # Make prediction
-        if models['hypertension'] is not None:
-            # Use your trained model
+        # Make prediction using trained model
+        if models['hypertension'] is None:
+            return jsonify({'error': 'Hypertension model not available'}), 500
+        
+        try:
             prediction = models['hypertension'].predict(processed_features)[0]
             probability = models['hypertension'].predict_proba(processed_features)[0]
-            
-            # Get probability of positive class (hypertension = 1)
             hypertension_probability = probability[1] if len(probability) > 1 else prediction
-            
-        else:
-            # Fallback prediction logic
-            logger.warning("Hypertension model not loaded, using fallback logic")
-            age, systolic_bp, bmi, smoking = features[0], features[1], features[3], features[4]
-            
-            # Simple rule-based fallback
-            risk_score = 0.1  # Base risk
-            if systolic_bp > 140: risk_score += 0.4
-            if age > 45: risk_score += 0.2
-            if bmi > 30: risk_score += 0.2
-            if smoking: risk_score += 0.3
-            
+        except Exception as model_error:
+            logger.error(f"Hypertension model prediction failed: {str(model_error)}")
+            # Fallback logic based on medical risk factors
+            male, age, smoking, bmi, sys_bp, dia_bp = features[0], features[1], features[2], features[9], features[7], features[8]
+            risk_score = 0.1
+            if sys_bp > 140: risk_score += 0.4   # High systolic BP
+            if dia_bp > 90: risk_score += 0.3    # High diastolic BP
+            if age > 45: risk_score += 0.2       # Age factor
+            if bmi > 30: risk_score += 0.2       # Obesity
+            if smoking == 1: risk_score += 0.25  # Current smoker
+            if male == 1: risk_score += 0.1      # Male gender
+            if features[5] == 1: risk_score += 0.15  # Diabetes
             hypertension_probability = min(risk_score, 0.95)
+            logger.info(f"Using fallback prediction for hypertension: {hypertension_probability}")
         
         return jsonify({
             'probability': float(hypertension_probability),

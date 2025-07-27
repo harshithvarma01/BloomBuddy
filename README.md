@@ -4,17 +4,50 @@
 
 BloomBuddy is a comprehensive AI-powered health companion application that provides personalized health insights, risk analysis, and intelligent medical document processing. The platform combines machine learning models for disease prediction with advanced LLM integration for conversational health assistance and PDF medical report analysis.
 
+## 📸 Demo Gallery
+
+### 🏠 Main Dashboard
+![BloomBuddy Dashboard](./docs/images/dashboard-demo.png)
+*Intuitive main interface with health assessment options and AI chat access*
+
+### 🤖 AI Chat Interface
+![AI Chat Interface](./docs/images/chat-interface-demo.png)
+*Conversational AI with multiple LLM providers and contextual health discussions*
+
+### 📊 Health Risk Assessment
+![Risk Assessment Form](./docs/images/risk-assessment-demo.png)
+*Select your health assessment category: Heart Disease, Hypertension, Diabetes, or upload medical reports for comprehensive analysis*
+
+![Risk Assessment Results](./docs/images/form.png)
+*Detailed health questionnaire with medical parameters including age, blood pressure, cholesterol, ECG results, and cardiovascular indicators*
+
+### 📋 Assessment Results
+![Assessment Results](./docs/images/assessment-results-demo.png)
+*Detailed risk analysis with AI-generated recommendations and actionable insights*
+
+### 📄 PDF Report Analysis
+![PDF Analysis](./docs/images/pdf-analysis-demo.png)
+*Intelligent medical document processing with AI-powered insights*
+
+### 💬 Chat About Results
+![Chat Integration](./docs/images/chat-results-demo.png)
+*Seamless integration allowing users to discuss assessment results with AI*
+
+---
+
 ## ✨ Key Features
 
 ### 🤖 AI-Powered Health Analysis
 - **Conversational AI**: Chat interface with multiple LLM providers (OpenAI, Anthropic Claude, Google Gemini)
 - **Medical Report Processing**: Upload and analyze PDF medical reports with AI-powered insights
 - **Contextual Memory**: Maintains conversation history and context across sessions
+- **Post-Assessment Chat**: Discuss your health assessment results directly with the AI
 
 ### 📊 Machine Learning Predictions
 - **Disease Risk Assessment**: Predictive models for diabetes, heart disease, and hypertension
-- **Personalized Risk Scores**: ML-based risk percentage calculations
+- **Personalized Risk Scores**: ML-based risk percentage calculations with confidence levels
 - **Evidence-Based Recommendations**: AI-generated health suggestions based on risk analysis
+- **Interactive Results**: Navigate directly to chat interface to discuss findings
 
 ### 📄 Document Analysis
 - **PDF Text Extraction**: Robust PDF parsing with metadata preservation
@@ -37,8 +70,8 @@ BloomBuddy is a comprehensive AI-powered health companion application that provi
 
 ```bash
 # 1. Clone the repository
-git clone <YOUR_GIT_URL>
-cd bloombuddy
+git clone https://github.com/harshithvarma01/BloomBuddy.git
+cd BloomBuddy
 
 # 2. Install frontend dependencies
 npm install
@@ -47,10 +80,10 @@ npm install
 pip install -r requirements.txt
 
 # 4. Set up environment variables
-cp .env.example .env
-# Edit .env with your API keys (see configuration section)
+# Copy the existing .env file and edit with your API keys
+# See configuration section for details
 
-# 5. Start the ML API server (optional)
+# 5. Start the ML API server
 python ml-api-server.py
 
 # 6. Start the development server
@@ -58,6 +91,13 @@ npm run dev
 ```
 
 The application will be available at `http://localhost:5173`
+
+### 🎯 Key User Flows
+
+1. **Health Assessment**: Select assessment category → Fill out health questionnaire → Get ML-powered risk analysis → Download PDF report
+2. **Assessment Discussion**: Complete health assessment → Click "Chat About Report" → Automatic redirect to chat with assessment data loaded → Discuss results with AI
+3. **Document Analysis**: Upload medical PDF → Get AI analysis → Chat about findings
+4. **Direct Chat**: Access AI chat → Ask health questions → Get personalized responses
 
 ## ⚙️ Configuration
 

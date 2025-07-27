@@ -7,8 +7,7 @@ import { PredictionForm } from '@/components/PredictionForm';
 import { FileUpload } from '@/components/FileUpload';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { ArrowLeft, Shield, Zap, Brain, Heart, MessageCircle, FileText, TrendingUp, Users, Clock, Award, CheckCircle, Sparkles, Star, ArrowRight, Stethoscope } from 'lucide-react';
-import heroImage from '@/assets/hero-medical.jpg';
+import { ArrowLeft, Shield, Brain, Heart, MessageCircle, FileText, CheckCircle, Sparkles, ArrowRight, Stethoscope } from 'lucide-react';
 
 type AppState = 'home' | 'chat' | 'disease-selection' | 'prediction-form' | 'file-upload';
 
@@ -116,7 +115,7 @@ const Index = () => {
                     </div>
                     
                     {/* Enhanced Typography */}
-                    <h1 className="text-7xl font-bold bg-gradient-to-r from-gray-900 via-indigo-800 to-purple-800 dark:from-white dark:via-indigo-200 dark:to-purple-200 bg-clip-text text-transparent mb-8 leading-tight">
+                    <h1 className="text-7xl font-bold text-gray-900 dark:text-white mb-8 leading-tight">
                       Meet BloomBuddy: Your Personal AI Health Companion
                     </h1>
                     
@@ -134,7 +133,7 @@ const Index = () => {
                       className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 transition-all duration-300 text-xl font-semibold px-12 py-6 rounded-2xl shadow-xl hover:shadow-2xl hover:-translate-y-1 transform"
                     >
                       <MessageCircle className="w-6 h-6 mr-3" />
-                      Start Your Assessment
+                      Secure Your Health Now
                       <ArrowRight className="w-5 h-5 ml-2" />
                     </Button>
                   </div>
@@ -146,7 +145,7 @@ const Index = () => {
             <section className="mb-24">
               <div className="max-w-6xl mx-auto">
                 <div className="text-center mb-16">
-                  <h2 className="text-5xl font-bold bg-gradient-to-r from-gray-900 to-indigo-800 dark:from-white dark:to-indigo-200 bg-clip-text text-transparent mb-6">
+                  <h2 className="text-5xl font-bold text-gray-900 dark:text-white mb-6">
                     How BloomBuddy Helps You
                   </h2>
                   <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
@@ -181,7 +180,7 @@ const Index = () => {
                   
                   <Card className="relative p-16 bg-gradient-to-br from-white via-white/95 to-indigo-50/30 dark:from-gray-900 dark:via-gray-800/95 dark:to-indigo-950/30 border border-indigo-100 dark:border-gray-700/50 shadow-2xl dark:shadow-gray-900/50">
                     <div className="text-center mb-16">
-                      <h2 className="text-5xl font-bold bg-gradient-to-r from-gray-900 to-indigo-800 dark:from-white dark:to-indigo-200 bg-clip-text text-transparent mb-6">
+                      <h2 className="text-5xl font-bold text-gray-900 dark:text-white mb-6">
                         Why Choose BloomBuddy?
                       </h2>
                       <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
@@ -212,45 +211,6 @@ const Index = () => {
                       </Button>
                     </div>
                   </Card>
-                </div>
-              </div>
-            </section>
-
-            {/* Enhanced CTA Section */}
-            <section className="text-center">
-              <div className="max-w-5xl mx-auto">
-                <div className="relative overflow-hidden rounded-3xl shadow-2xl">
-                  <img 
-                    src={heroImage} 
-                    alt="Healthcare Technology" 
-                    className="w-full h-80 object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-r from-indigo-900/90 via-purple-900/85 to-pink-900/90 flex items-center justify-center">
-                    <div className="text-center text-white p-12 max-w-4xl">
-                      <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full border border-white/30 mb-6">
-                        <Star className="w-4 h-4 text-yellow-300" />
-                        <span className="text-sm font-semibold uppercase tracking-wider">Trusted Healthcare AI</span>
-                      </div>
-                      
-                      <h2 className="text-5xl font-bold mb-6 leading-tight">
-                        Ready to Transform Your Health Journey?
-                      </h2>
-                      
-                      <p className="text-xl mb-10 opacity-95 leading-relaxed max-w-3xl mx-auto">
-                        Join thousands of users who trust BloomBuddy for their health insights
-                      </p>
-                      
-                      <Button
-                        onClick={handleStartAssessment}
-                        size="lg"
-                        className="bg-white text-indigo-700 hover:bg-gray-100 transition-all duration-300 text-xl font-semibold px-12 py-6 rounded-2xl shadow-xl hover:shadow-2xl hover:-translate-y-1 transform"
-                      >
-                        <MessageCircle className="w-6 h-6 mr-3" />
-                        Start Your Assessment
-                        <ArrowRight className="w-5 h-5 ml-2" />
-                      </Button>
-                    </div>
-                  </div>
                 </div>
               </div>
             </section>

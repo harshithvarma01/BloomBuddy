@@ -68,7 +68,7 @@ export default function Chat() {
             </Button>
             
             <div className="text-center mb-8">
-              <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent">
+              <h1 className="text-4xl font-bold mb-4 text-gray-900 dark:text-white">
                 AI Health Chat
               </h1>
               <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
