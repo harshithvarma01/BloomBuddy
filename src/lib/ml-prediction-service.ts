@@ -4,35 +4,44 @@ export interface MLPredictionInput {
   // Common fields
   age: number;
   
-  // Diabetes specific
-  glucose?: number;
-  bmi?: number;
+  // Diabetes specific - exactly matching your diabetes.csv columns
   pregnancies?: number;
+  glucose?: number;
   bloodPressure?: number;
-  insulin?: number;
   skinThickness?: number;
+  insulin?: number;
+  bmi?: number;
   diabetesPedigreeFunction?: number;
   
-  // Heart Disease specific
+  // Heart Disease specific - exactly matching your heart.csv columns
   sex?: number; // 0: Female, 1: Male
-  chestPainType?: number; // 0-3
-  restingBP?: number;
-  cholesterol?: number;
-  fastingBS?: number; // 0: <120mg/dl, 1: >120mg/dl
-  restingECG?: number; // 0-2
-  maxHR?: number;
-  exerciseAngina?: number; // 0: No, 1: Yes
+  chestPainType?: number; // cp: 0-3
+  restingBP?: number; // trestbps
+  cholesterol?: number; // chol
+  fastingBS?: number; // fbs: 0: <120mg/dl, 1: >120mg/dl
+  restingECG?: number; // restecg: 0-2
+  maxHR?: number; // thalach
+  exerciseAngina?: number; // exang: 0: No, 1: Yes
   oldpeak?: number;
-  stSlope?: number; // 0-2
+  stSlope?: number; // slope: 0-2
+  ca?: number; // major vessels: 0-3
+  thal?: number; // thalassemia: 1-3
   
-  // Hypertension specific
-  systolicBP?: number;
-  diastolicBP?: number;
-  smoking?: number; // 0: No, 1: Yes
-  alcohol?: number; // 0: No, 1: Yes
-  exercise?: number; // 0: No, 1: Yes
-  familyHistory?: number; // 0: No, 1: Yes
-  stress?: number; // 0-10 scale
+  // Hypertension specific - exactly matching your hypertension.csv columns
+  smoking?: number; // currentSmoker: 0: No, 1: Yes
+  cigsPerDay?: number;
+  BPMeds?: number; // 0: No, 1: Yes
+  diabetes?: number; // 0: No, 1: Yes
+  totChol?: number; // total cholesterol
+  systolicBP?: number; // sysBP
+  diastolicBP?: number; // diaBP
+  heartRate?: number; // heart rate
+  
+  // Legacy fields for backward compatibility
+  alcohol?: number;
+  exercise?: number;
+  familyHistory?: number;
+  stress?: number;
 }
 
 export interface MLPredictionResult {
@@ -71,18 +80,19 @@ class MLPredictionService {
 
   /**
    * Predict diabetes risk using your trained model
+   * Features: [Pregnancies, Glucose, BloodPressure, SkinThickness, Insulin, BMI, DiabetesPedigreeFunction, Age]
    */
   async predictDiabetes(input: MLPredictionInput): Promise<MLPredictionResult> {
     const payload = {
       features: [
-        input.pregnancies || 0,
-        input.glucose || 0,
-        input.bloodPressure || 0,
-        input.skinThickness || 0,
-        input.insulin || 0,
-        input.bmi || 0,
-        input.diabetesPedigreeFunction || 0,
-        input.age
+        input.pregnancies || 0,                    // Pregnancies
+        input.glucose || 100,                      // Glucose
+        input.bloodPressure || 70,                 // BloodPressure
+        input.skinThickness || 20,                 // SkinThickness
+        input.insulin || 80,                       // Insulin
+        input.bmi || 25,                          // BMI
+        input.diabetesPedigreeFunction || 0.5,     // DiabetesPedigreeFunction
+        input.age                                  // Age
       ]
     };
 
@@ -108,10 +118,12 @@ class MLPredictionService {
         confidence: result.confidence || 0.85,
         features: {
           pregnancies: input.pregnancies || 0,
-          glucose: input.glucose || 0,
-          bloodPressure: input.bloodPressure || 0,
-          insulin: input.insulin || 0,
-          bmi: input.bmi || 0,
+          glucose: input.glucose || 100,
+          bloodPressure: input.bloodPressure || 70,
+          skinThickness: input.skinThickness || 20,
+          insulin: input.insulin || 80,
+          bmi: input.bmi || 25,
+          diabetesPedigreeFunction: input.diabetesPedigreeFunction || 0.5,
           age: input.age
         }
       };
@@ -128,17 +140,19 @@ class MLPredictionService {
   async predictHeartDisease(input: MLPredictionInput): Promise<MLPredictionResult> {
     const payload = {
       features: [
-        input.age,
-        input.sex || 1,
-        input.chestPainType || 0,
-        input.restingBP || input.bloodPressure || 120,
-        input.cholesterol || 200,
-        input.fastingBS || 0,
-        input.restingECG || 0,
-        input.maxHR || 150,
-        input.exerciseAngina || 0,
-        input.oldpeak || 0,
-        input.stSlope || 1
+        input.age,                                 // age
+        input.sex || 1,                           // sex (0: Female, 1: Male)
+        input.chestPainType || 0,                 // cp (chest pain type)
+        input.restingBP || 120,                   // trestbps (resting blood pressure)
+        input.cholesterol || 200,                 // chol (cholesterol)
+        input.fastingBS || 0,                     // fbs (fasting blood sugar > 120 mg/dl)
+        input.restingECG || 0,                    // restecg (resting ECG)
+        input.maxHR || 150,                       // thalach (max heart rate achieved)
+        input.exerciseAngina || 0,                // exang (exercise induced angina)
+        input.oldpeak || 0,                       // oldpeak (ST depression)
+        input.stSlope || 1,                       // slope (peak exercise ST slope)
+        input.ca || 0,                            // ca (number of major vessels)
+        input.thal || 1                           // thal (thalassemia)
       ]
     };
 
@@ -164,9 +178,11 @@ class MLPredictionService {
         confidence: result.confidence || 0.88,
         features: {
           age: input.age,
+          sex: input.sex || 1,
+          chestPainType: input.chestPainType || 0,
+          restingBP: input.restingBP || 120,
           cholesterol: input.cholesterol || 200,
-          maxHR: input.maxHR || 150,
-          restingBP: input.restingBP || input.bloodPressure || 120
+          maxHR: input.maxHR || 150
         }
       };
     } catch (error) {
@@ -177,19 +193,23 @@ class MLPredictionService {
 
   /**
    * Predict hypertension risk using your trained model
+   * Features: [male, age, currentSmoker, cigsPerDay, BPMeds, diabetes, totChol, sysBP, diaBP, BMI, heartRate, glucose]
    */
   async predictHypertension(input: MLPredictionInput): Promise<MLPredictionResult> {
     const payload = {
       features: [
-        input.age,
-        input.systolicBP || input.bloodPressure || 120,
-        input.diastolicBP || 80,
-        input.bmi || 25,
-        input.smoking || 0,
-        input.alcohol || 0,
-        input.exercise || 0,
-        input.familyHistory || 0,
-        input.stress || 5
+        input.sex || 0,                           // male (0: Female, 1: Male)
+        input.age,                                // age
+        input.smoking || 0,                       // currentSmoker
+        input.cigsPerDay || 0,                   // cigsPerDay
+        input.BPMeds || 0,                       // BPMeds
+        input.diabetes || 0,                     // diabetes
+        input.totChol || 200,                    // totChol
+        input.systolicBP || 120,                 // sysBP
+        input.diastolicBP || 80,                 // diaBP
+        input.bmi || 25,                         // BMI
+        input.heartRate || 70,                   // heartRate
+        input.glucose || 85                      // glucose
       ]
     };
 
@@ -215,9 +235,12 @@ class MLPredictionService {
         confidence: result.confidence || 0.82,
         features: {
           age: input.age,
-          systolicBP: input.systolicBP || input.bloodPressure || 120,
+          sex: input.sex || 0,
+          smoking: input.smoking || 0,
+          systolicBP: input.systolicBP || 120,
           diastolicBP: input.diastolicBP || 80,
-          bmi: input.bmi || 25
+          bmi: input.bmi || 25,
+          heartRate: input.heartRate || 70
         }
       };
     } catch (error) {

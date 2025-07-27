@@ -152,12 +152,28 @@ print(f"The predicted probability of this patient having hypertension risk is: {
 # --- 10. Save the Model and Scaler to .pkl Files ---
 # We save the trained model and the scaler so we can use them later without retraining.
 # This is essential for deploying the model in an application.
-# print("\n--- Saving Model and Scaler ---")
-# model_filename = 'hypertension_model.pkl'
-# scaler_filename = 'scaler.pkl'
+print("\n--- Saving Model and Scaler ---")
+model_filename = 'hypertension_model.pkl'
+scaler_filename = 'scaler.pkl'
 
-# joblib.dump(model, model_filename)
-# joblib.dump(scaler, scaler_filename)
+# Save to the current directory (Hypertenstion Model folder)
+joblib.dump(model, model_filename)
+joblib.dump(scaler, scaler_filename)
 
-# print(f"Model saved to '{model_filename}'")
-# print(f"Scaler saved to '{scaler_filename}'")
+print(f"Model saved to '{model_filename}'")
+print(f"Scaler saved to '{scaler_filename}'")
+
+# Verify the saved files
+print("\n--- Verifying Saved Files ---")
+import os
+if os.path.exists(model_filename):
+    test_model = joblib.load(model_filename)
+    print(f"✅ Model verification: {type(test_model)} - Has predict: {hasattr(test_model, 'predict')}")
+else:
+    print("❌ Model file not found after saving")
+
+if os.path.exists(scaler_filename):
+    test_scaler = joblib.load(scaler_filename)
+    print(f"✅ Scaler verification: {type(test_scaler)} - Has transform: {hasattr(test_scaler, 'transform')}")
+else:
+    print("❌ Scaler file not found after saving")
