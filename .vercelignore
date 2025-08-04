@@ -1,0 +1,22 @@
+# Ignore Python backend files for frontend deployment
+ml-api-server.py
+requirements.txt
+models/
+*.pkl
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+env/
+venv/
+ENV/
+
+# Ignore documentation and scripts not needed for frontend
+docs/
+scripts/
+*.md
+!README.md
+
+# Ignore development files
+.env.local
+.env.development
