@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -111,6 +112,7 @@ export const PredictionForm = ({ disease }: PredictionFormProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const [result, setResult] = useState<EnhancedPredictionResult | null>(null);
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   const fields = diseaseFields[disease] || [];
   const diseaseNames: Record<string, string> = {
@@ -307,8 +309,8 @@ export const PredictionForm = ({ disease }: PredictionFormProps) => {
       }));
     }
     
-    // Navigate to chat page
-    window.location.href = '/chat';
+    // Navigate to chat page using React Router
+    navigate('/chat');
     
     toast({
       title: "Redirecting to Chat",
