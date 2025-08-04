@@ -7,8 +7,8 @@
 1. **Prepare for deployment:**
    ```bash
    # Update your .env file with production backend URL
-   # Replace 'your-deployed-backend-url.com' with your actual backend URL
-   VITE_ML_API_URL=https://your-deployed-backend-url.com/api
+   # Replace with your actual Railway backend URL
+   VITE_ML_API_URL=https://web-production-1e69f.up.railway.app/api
    ```
 
 2. **Deploy to Vercel:**
@@ -85,7 +85,7 @@ Make sure your backend (Flask server) allows requests from your frontend domain:
 from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(app, origins=['https://your-frontend-domain.com'])
+CORS(app, origins=['https://bloom-buddy-8bgkblggj-rdks-projects.vercel.app'])
 ```
 
 ## 🔧 Build Commands Reference

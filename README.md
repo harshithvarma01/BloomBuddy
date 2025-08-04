@@ -1,5 +1,18 @@
 # BloomBuddy - AI-Powered Health Companion
 
+## 🌐 Live Application Status
+
+[![Vercel](https://img.shields.io/badge/Frontend-Live%20on%20Vercel-brightgreen?style=for-the-badge&logo=vercel)](https://bloom-buddy-8bgkblggj-rdks-projects.vercel.app)
+[![Railway](https://img.shields.io/badge/Backend-Live%20on%20Railway-success?style=for-the-badge&logo=railway)](https://web-production-1e69f.up.railway.app/api)
+
+**🟢 LIVE & DEPLOYED** 
+- **Frontend**: https://bloom-buddy-8bgkblggj-rdks-projects.vercel.app (Vercel)
+- **Backend API**: https://web-production-1e69f.up.railway.app/api (Railway)
+- **Last Updated**: August 2025
+- **Status**: ✅ Fully operational with navigation fixes applied
+
+---
+
 ## 🏥 Project Overview
 
 BloomBuddy is a comprehensive AI-powered health companion application that provides personalized health insights, risk analysis, and intelligent medical document processing. The platform combines machine learning models for disease prediction with advanced LLM integration for conversational health assistance and PDF medical report analysis.
@@ -115,7 +128,9 @@ VITE_GOOGLE_API_KEY=your-google-api-key-here
 VITE_DEFAULT_LLM_PROVIDER=anthropic
 
 # ML API Configuration
-VITE_ML_API_URL=http://localhost:5000/api
+# Environment configuration
+VITE_ML_API_URL=http://localhost:5000/api  # For local development
+# VITE_ML_API_URL=https://web-production-1e69f.up.railway.app/api  # For production
 
 # Optional: Advanced settings
 VITE_MAX_CONVERSATION_HISTORY=20
@@ -156,6 +171,30 @@ python ml-api-server.py
 For complete ML integration instructions, see [`ML_INTEGRATION_README.md`](ML_INTEGRATION_README.md)
 
 ## 🏗️ Architecture
+
+### 🌐 Deployment Architecture
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                       Production Deployment                      │
+├─────────────────────────────────────────────────────────────────┤
+│  Frontend (Vercel)              Backend (Railway)               │
+│  ┌─────────────────────┐       ┌─────────────────────┐         │
+│  │  React + TypeScript │◄──────┤  Python Flask API   │         │
+│  │  Vite Build         │       │  ML Models (pkl)    │         │
+│  │  SPA Routing        │       │  Health Predictions │         │
+│  │  CDN Distribution  │       │  CORS Configured    │         │
+│  └─────────────────────┘       └─────────────────────┘         │
+│                                                                 │
+│  External APIs                                                  │
+│  ┌─────────────────────┐                                       │
+│  │  Anthropic Claude   │                                       │
+│  │  OpenAI GPT         │                                       │
+│  │  Google AI          │                                       │
+│  └─────────────────────┘                                       │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+### 🔧 Technical Stack
 
 ### Frontend (React + TypeScript)
 ```
@@ -236,28 +275,66 @@ npm run lint         # Run ESLint
 
 ## 🚢 Production Deployment
 
-### Frontend Deployment
+### 🌐 Live Application
+- **Frontend**: https://bloom-buddy-8bgkblggj-rdks-projects.vercel.app
+- **Backend API**: https://web-production-1e69f.up.railway.app/api
+
+### ⚡ Frontend Deployment (Vercel)
 ```bash
+# Install Vercel CLI
+npm install -g vercel
+
+# Deploy to production
+vercel --prod
+
+# Build command (handled automatically by Vercel)
 npm run build
-# Deploy dist/ directory to your hosting provider
 ```
 
-### ML API Deployment
-```bash
-# Using Gunicorn
-gunicorn -w 4 -b 0.0.0.0:5000 ml-api-server:app
-
-# Using Docker
-docker build -t bloombuddy-ml .
-docker run -p 5000:5000 bloombuddy-ml
+**Vercel Configuration** (`vercel.json`):
+```json
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "framework": "vite",
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}
 ```
 
-### Environment Configuration
+### 🚂 ML API Deployment (Railway)
+The ML backend is deployed using Railway's automatic deployment from GitHub:
+
 ```bash
-# Production environment variables
+# Railway handles deployment automatically
+# Backend URL: https://web-production-1e69f.up.railway.app/api
+
+# Production configuration
 MODELS_DIR=./models
 PORT=5000
 DEBUG=false
+```
+
+**Railway Features**:
+- ✅ Automatic deployments from GitHub
+- ✅ Built-in HTTPS and domain management
+- ✅ Environment variable management
+- ✅ Health monitoring and logs
+
+### 🔧 Environment Configuration
+```bash
+# Frontend (.env)
+VITE_ML_API_URL=https://web-production-1e69f.up.railway.app/api
+VITE_ANTHROPIC_API_KEY=your_anthropic_key
+VITE_OPENAI_API_KEY=your_openai_key
+VITE_DEFAULT_LLM_PROVIDER=anthropic
+
+# Backend (Railway Environment Variables)
+MODELS_DIR=./models
+PORT=5000
+DEBUG=false
+CORS_ORIGINS=https://bloom-buddy-8bgkblggj-rdks-projects.vercel.app
 ```
 
 ## 🛡️ Security & Privacy
@@ -300,6 +377,48 @@ VITE_ANTHROPIC_API_KEY = sk-ant-your-key-here  # Wrong (spaces)
 // Enable debug logging in browser
 localStorage.setItem('debug_llm', 'true');
 ```
+
+## 🚀 Quick Deployment Guide
+
+### Deploy Your Own Instance
+
+**1. Fork & Clone the Repository**
+```bash
+git clone https://github.com/your-username/BloomBuddy.git
+cd BloomBuddy
+```
+
+**2. Deploy Backend to Railway**
+- Connect your GitHub repo to Railway
+- Railway will auto-detect the Python app
+- Add environment variables: `MODELS_DIR=./models`
+- Backend will be available at `https://your-app.up.railway.app`
+
+**3. Deploy Frontend to Vercel** 
+```bash
+npm install -g vercel
+vercel --prod
+```
+- Add environment variables in Vercel dashboard
+- Update `VITE_ML_API_URL` with your Railway backend URL
+- Frontend will be available at your Vercel domain
+
+**4. Configure Environment Variables**
+```bash
+# Vercel Environment Variables
+VITE_ML_API_URL=https://your-railway-app.up.railway.app/api
+VITE_ANTHROPIC_API_KEY=your_key_here
+VITE_OPENAI_API_KEY=your_key_here
+VITE_DEFAULT_LLM_PROVIDER=anthropic
+```
+
+**5. Test Your Deployment**
+- Visit your Vercel domain
+- Complete a health assessment
+- Test the "Chat About Report" functionality
+- Verify API connections are working
+
+---
 
 ## 🤝 Contributing
 

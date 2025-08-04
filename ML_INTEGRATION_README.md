@@ -90,7 +90,9 @@ python save_scalers_helper.py
 Update your `.env` file in the React app:
 
 ```bash
-VITE_ML_API_URL=http://localhost:5000/api
+# Frontend environment configuration
+VITE_ML_API_URL=http://localhost:5000/api  # Development
+# VITE_ML_API_URL=https://web-production-1e69f.up.railway.app/api  # Production
 ```
 
 ### 4. Model Input Specifications

@@ -1,5 +1,11 @@
 # ML Model Features Guide
 
+## 🌐 Production API Endpoints
+**Live Backend**: https://web-production-1e69f.up.railway.app/api  
+**Note**: Examples below use production URLs. For local development, replace with `http://localhost:5000/api`
+
+---
+
 ## Overview
 This guide documents the exact feature requirements for each ML model in BloomBuddy based on your trained models.
 
