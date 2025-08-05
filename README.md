@@ -6,7 +6,7 @@
 [![Railway](https://img.shields.io/badge/Backend-Live%20on%20Railway-success?style=for-the-badge&logo=railway)](https://web-production-1e69f.up.railway.app/api)
 
 **🟢 LIVE & DEPLOYED** 
-- **Frontend**: https://bloom-buddy-8bgkblggj-rdks-projects.vercel.app (Vercel)
+- **Frontend**: https://bloom-buddy-two.vercel.app/ (Vercel)
 - **Backend API**: https://web-production-1e69f.up.railway.app/api (Railway)
 - **Last Updated**: August 2025
 - **Status**: ✅ Fully operational with navigation fixes applied
@@ -175,22 +175,22 @@ For complete ML integration instructions, see [`ML_INTEGRATION_README.md`](ML_IN
 ### 🌐 Deployment Architecture
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                       Production Deployment                      │
+│                       Production Deployment                     │
 ├─────────────────────────────────────────────────────────────────┤
 │  Frontend (Vercel)              Backend (Railway)               │
-│  ┌─────────────────────┐       ┌─────────────────────┐         │
-│  │  React + TypeScript │◄──────┤  Python Flask API   │         │
-│  │  Vite Build         │       │  ML Models (pkl)    │         │
-│  │  SPA Routing        │       │  Health Predictions │         │
-│  │  CDN Distribution  │       │  CORS Configured    │         │
-│  └─────────────────────┘       └─────────────────────┘         │
+│  ┌─────────────────────┐       ┌─────────────────────┐          │
+│  │  React + TypeScript │◄──────┤  Python Flask API   │          │
+│  │  Vite Build         │       │  ML Models (pkl)    │          │
+│  │  SPA Routing        │       │  Health Predictions │          │
+│  │  CDN Distribution  │       │  CORS Configured    │           │
+│  └─────────────────────┘       └─────────────────────┘          │
 │                                                                 │
 │  External APIs                                                  │
-│  ┌─────────────────────┐                                       │
-│  │  Anthropic Claude   │                                       │
-│  │  OpenAI GPT         │                                       │
-│  │  Google AI          │                                       │
-│  └─────────────────────┘                                       │
+│  ┌─────────────────────┐                                        │
+│  │  Anthropic Claude   │                                        │
+│  │  OpenAI GPT         │                                        │
+│  │  Google AI          │                                        │
+│  └─────────────────────┘                                        │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
@@ -276,7 +276,7 @@ npm run lint         # Run ESLint
 ## 🚢 Production Deployment
 
 ### 🌐 Live Application
-- **Frontend**: https://bloom-buddy-8bgkblggj-rdks-projects.vercel.app
+- **Frontend**: https://bloom-buddy-two.vercel.app/
 - **Backend API**: https://web-production-1e69f.up.railway.app/api
 
 ### ⚡ Frontend Deployment (Vercel)
@@ -334,7 +334,7 @@ VITE_DEFAULT_LLM_PROVIDER=anthropic
 MODELS_DIR=./models
 PORT=5000
 DEBUG=false
-CORS_ORIGINS=https://bloom-buddy-8bgkblggj-rdks-projects.vercel.app
+CORS_ORIGINS=https://bloom-buddy-two.vercel.app/
 ```
 
 ## 🛡️ Security & Privacy
