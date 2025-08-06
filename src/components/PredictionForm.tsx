@@ -319,21 +319,21 @@ export const PredictionForm = ({ disease }: PredictionFormProps) => {
   };
 
   return (
-    <Card className="w-full max-w-3xl mx-auto p-8 bg-gradient-card backdrop-blur-sm border-0 shadow-card">
-      <div className="text-center mb-8">
-        <h2 className="text-2xl font-bold text-foreground mb-2">
+    <Card className="w-full max-w-4xl mx-auto p-6 sm:p-8 bg-gradient-card backdrop-blur-sm border-0 shadow-card">
+      <div className="text-center mb-6 sm:mb-8">
+        <h2 className="text-xl sm:text-2xl font-bold text-foreground mb-2">
           {diseaseNames[disease]} Risk Assessment
         </h2>
-        <p className="text-muted-foreground">
+        <p className="text-sm sm:text-base text-muted-foreground">
           Please fill in your health information for analysis
         </p>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {fields.map((field) => (
             <div key={field.id} className="space-y-2">
-              <Label htmlFor={field.id} className="text-sm font-medium">
+              <Label htmlFor={field.id} className="text-xs sm:text-sm font-medium">
                 {field.label} {field.unit && <span className="text-muted-foreground">({field.unit})</span>}
               </Label>
               {field.type === 'number' ? (
@@ -343,7 +343,7 @@ export const PredictionForm = ({ disease }: PredictionFormProps) => {
                   placeholder={field.placeholder}
                   value={formData[field.id] || ''}
                   onChange={(e) => handleInputChange(field.id, e.target.value)}
-                  className="bg-white/50 border-primary/30 focus:border-primary transition-smooth"
+                  className="bg-white/50 border-primary/30 focus:border-primary transition-smooth text-sm sm:text-base"
                   required
                 />
               ) : (
@@ -351,7 +351,7 @@ export const PredictionForm = ({ disease }: PredictionFormProps) => {
                   id={field.id}
                   value={formData[field.id] || ''}
                   onChange={(e) => handleInputChange(field.id, e.target.value)}
-                  className="w-full p-2 rounded-md border border-primary/30 bg-white/50 focus:border-primary transition-smooth"
+                  className="w-full p-2 sm:p-2.5 rounded-md border border-primary/30 bg-white/50 focus:border-primary transition-smooth text-sm sm:text-base"
                   required
                 >
                   <option value="">Select...</option>
@@ -370,7 +370,7 @@ export const PredictionForm = ({ disease }: PredictionFormProps) => {
           <Button
             type="submit"
             disabled={isLoading || fields.some(field => !formData[field.id])}
-            className="w-full bg-primary hover:bg-primary/90 transition-smooth"
+            className="w-full bg-primary hover:bg-primary/90 transition-smooth py-2.5 sm:py-3 text-sm sm:text-base"
           >
             {isLoading ? 'Analyzing...' : 'Analyze Risk'}
           </Button>
@@ -379,76 +379,76 @@ export const PredictionForm = ({ disease }: PredictionFormProps) => {
         {isLoading && (
           <div className="space-y-2">
             <Progress value={66} className="w-full" />
-            <p className="text-sm text-center text-muted-foreground">
+            <p className="text-xs sm:text-sm text-center text-muted-foreground">
               Running ML analysis...
             </p>
           </div>
         )}
 
         {result && (
-          <div className="mt-8 space-y-8 animate-slide-up">
+          <div className="mt-6 sm:mt-8 space-y-6 sm:space-y-8 animate-slide-up">
             {/* Risk Assessment Header */}
-            <div className="text-center p-6 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-gray-700 rounded-2xl border border-blue-200 dark:border-gray-600">
-              <div className="flex items-center justify-center gap-3 mb-4">
+            <div className="text-center p-4 sm:p-6 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-gray-700 rounded-xl sm:rounded-2xl border border-blue-200 dark:border-gray-600">
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-3 sm:mb-4">
                 {result.riskLevel === 'Low' ? (
-                  <div className="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center">
-                    <CheckCircle className="w-6 h-6 text-green-600 dark:text-green-400" />
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center">
+                    <CheckCircle className="w-5 h-5 sm:w-6 sm:h-6 text-green-600 dark:text-green-400" />
                   </div>
                 ) : result.riskLevel === 'Medium' ? (
-                  <div className="w-12 h-12 bg-yellow-100 dark:bg-yellow-900/30 rounded-full flex items-center justify-center">
-                    <AlertCircle className="w-6 h-6 text-yellow-600 dark:text-yellow-400" />
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-yellow-100 dark:bg-yellow-900/30 rounded-full flex items-center justify-center">
+                    <AlertCircle className="w-5 h-5 sm:w-6 sm:h-6 text-yellow-600 dark:text-yellow-400" />
                   </div>
                 ) : (
-                  <div className="w-12 h-12 bg-red-100 dark:bg-red-900/30 rounded-full flex items-center justify-center">
-                    <Heart className="w-6 h-6 text-red-600 dark:text-red-400" />
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-red-100 dark:bg-red-900/30 rounded-full flex items-center justify-center">
+                    <Heart className="w-5 h-5 sm:w-6 sm:h-6 text-red-600 dark:text-red-400" />
                   </div>
                 )}
-                <div>
-                  <h3 className="text-2xl font-bold text-gray-900 dark:text-white">Risk Assessment Result</h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-300">Based on ML Analysis & AI Recommendations</p>
+                <div className="text-center sm:text-left">
+                  <h3 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">Risk Assessment Result</h3>
+                  <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-300">Based on ML Analysis & AI Recommendations</p>
                 </div>
               </div>
               
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-                <div className="text-center">
-                  <div className={`text-3xl font-bold ${getRiskColor(result.riskLevel)}`}>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 mb-4 sm:mb-6">
+                <div className="text-center p-3 sm:p-0">
+                  <div className={`text-2xl sm:text-3xl font-bold ${getRiskColor(result.riskLevel)}`}>
                     {result.riskPercentage}%
                   </div>
-                  <p className="text-sm text-gray-600 dark:text-gray-300">Risk Level</p>
+                  <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-300">Risk Level</p>
                 </div>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-blue-600 dark:text-blue-400">
+                <div className="text-center p-3 sm:p-0">
+                  <div className="text-2xl sm:text-3xl font-bold text-blue-600 dark:text-blue-400">
                     {Math.round(result.confidence * 100)}%
                   </div>
-                  <p className="text-sm text-gray-600 dark:text-gray-300">Confidence</p>
+                  <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-300">Confidence</p>
                 </div>
-                <div className="text-center">
-                  <div className={`text-2xl font-bold ${getRiskColor(result.riskLevel)}`}>
+                <div className="text-center p-3 sm:p-0">
+                  <div className={`text-xl sm:text-2xl font-bold ${getRiskColor(result.riskLevel)}`}>
                     {result.riskLevel}
                   </div>
-                  <p className="text-sm text-gray-600 dark:text-gray-300">Risk Category</p>
+                  <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-300">Risk Category</p>
                 </div>
               </div>
               
-              <Progress value={result.riskPercentage} className="h-3" />
+              <Progress value={result.riskPercentage} className="h-2 sm:h-3" />
             </div>
 
             {/* Risk Factors Analysis */}
             {(result.riskFactors.high.length > 0 || result.riskFactors.moderate.length > 0) && (
-              <Card className="p-6">
-                <h4 className="text-lg font-semibold mb-4 flex items-center gap-2">
-                  <TrendingUp className="w-5 h-5 text-orange-600" />
+              <Card className="p-4 sm:p-6">
+                <h4 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4 flex items-center gap-2">
+                  <TrendingUp className="w-4 h-4 sm:w-5 sm:h-5 text-orange-600" />
                   Risk Factors Analysis
                 </h4>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4">
                   {result.riskFactors.high.length > 0 && (
                     <div className="space-y-2">
-                      <h5 className="font-medium text-red-600 dark:text-red-400">High Risk Factors</h5>
+                      <h5 className="font-medium text-red-600 dark:text-red-400 text-sm sm:text-base">High Risk Factors</h5>
                       <ul className="space-y-1">
                         {result.riskFactors.high.map((factor, index) => (
-                          <li key={index} className="flex items-center gap-2 text-sm">
-                            <div className="w-2 h-2 bg-red-500 rounded-full"></div>
-                            {factor}
+                          <li key={index} className="flex items-center gap-2 text-xs sm:text-sm">
+                            <div className="w-2 h-2 bg-red-500 rounded-full flex-shrink-0"></div>
+                            <span className="break-words">{factor}</span>
                           </li>
                         ))}
                       </ul>
@@ -456,12 +456,12 @@ export const PredictionForm = ({ disease }: PredictionFormProps) => {
                   )}
                   {result.riskFactors.moderate.length > 0 && (
                     <div className="space-y-2">
-                      <h5 className="font-medium text-yellow-600 dark:text-yellow-400">Moderate Risk Factors</h5>
+                      <h5 className="font-medium text-yellow-600 dark:text-yellow-400 text-sm sm:text-base">Moderate Risk Factors</h5>
                       <ul className="space-y-1">
                         {result.riskFactors.moderate.map((factor, index) => (
-                          <li key={index} className="flex items-center gap-2 text-sm">
-                            <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
-                            {factor}
+                          <li key={index} className="flex items-center gap-2 text-xs sm:text-sm">
+                            <div className="w-2 h-2 bg-yellow-500 rounded-full flex-shrink-0"></div>
+                            <span className="break-words">{factor}</span>
                           </li>
                         ))}
                       </ul>
@@ -472,21 +472,21 @@ export const PredictionForm = ({ disease }: PredictionFormProps) => {
             )}
 
             {/* AI-Powered Recommendations */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 sm:gap-6">
               {/* Immediate Actions */}
               {result.llmSuggestions.immediateActions.length > 0 && (
-                <Card className="p-6">
-                  <h4 className="text-lg font-semibold mb-4 flex items-center gap-2 text-red-600 dark:text-red-400">
-                    <AlertCircle className="w-5 h-5" />
+                <Card className="p-4 sm:p-6">
+                  <h4 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4 flex items-center gap-2 text-red-600 dark:text-red-400">
+                    <AlertCircle className="w-4 h-4 sm:w-5 sm:h-5" />
                     Immediate Actions
                   </h4>
-                  <ul className="space-y-3">
+                  <ul className="space-y-2 sm:space-y-3">
                     {result.llmSuggestions.immediateActions.map((action, index) => (
-                      <li key={index} className="flex items-start gap-3 text-sm">
-                        <div className="w-6 h-6 bg-red-100 dark:bg-red-900/30 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <li key={index} className="flex items-start gap-2 sm:gap-3 text-xs sm:text-sm">
+                        <div className="w-5 h-5 sm:w-6 sm:h-6 bg-red-100 dark:bg-red-900/30 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
                           <span className="text-xs font-bold text-red-600 dark:text-red-400">{index + 1}</span>
                         </div>
-                        <span className="text-gray-700 dark:text-gray-300">{action}</span>
+                        <span className="text-gray-700 dark:text-gray-300 leading-relaxed">{action}</span>
                       </li>
                     ))}
                   </ul>
@@ -495,16 +495,16 @@ export const PredictionForm = ({ disease }: PredictionFormProps) => {
 
               {/* Lifestyle Recommendations */}
               {result.llmSuggestions.lifestyleRecommendations.length > 0 && (
-                <Card className="p-6">
-                  <h4 className="text-lg font-semibold mb-4 flex items-center gap-2 text-green-600 dark:text-green-400">
-                    <Activity className="w-5 h-5" />
+                <Card className="p-4 sm:p-6">
+                  <h4 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4 flex items-center gap-2 text-green-600 dark:text-green-400">
+                    <Activity className="w-4 h-4 sm:w-5 sm:h-5" />
                     Lifestyle Changes
                   </h4>
-                  <ul className="space-y-3">
+                  <ul className="space-y-2 sm:space-y-3">
                     {result.llmSuggestions.lifestyleRecommendations.map((rec, index) => (
-                      <li key={index} className="flex items-start gap-3 text-sm">
-                        <CheckCircle className="w-4 h-4 text-green-600 dark:text-green-400 mt-1 flex-shrink-0" />
-                        <span className="text-gray-700 dark:text-gray-300">{rec}</span>
+                      <li key={index} className="flex items-start gap-2 sm:gap-3 text-xs sm:text-sm">
+                        <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4 text-green-600 dark:text-green-400 mt-1 flex-shrink-0" />
+                        <span className="text-gray-700 dark:text-gray-300 leading-relaxed">{rec}</span>
                       </li>
                     ))}
                   </ul>
@@ -513,16 +513,16 @@ export const PredictionForm = ({ disease }: PredictionFormProps) => {
 
               {/* Medical Advice */}
               {result.llmSuggestions.medicalAdvice.length > 0 && (
-                <Card className="p-6">
-                  <h4 className="text-lg font-semibold mb-4 flex items-center gap-2 text-blue-600 dark:text-blue-400">
-                    <Shield className="w-5 h-5" />
+                <Card className="p-4 sm:p-6">
+                  <h4 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4 flex items-center gap-2 text-blue-600 dark:text-blue-400">
+                    <Shield className="w-4 h-4 sm:w-5 sm:h-5" />
                     Medical Guidance
                   </h4>
-                  <ul className="space-y-3">
+                  <ul className="space-y-2 sm:space-y-3">
                     {result.llmSuggestions.medicalAdvice.map((advice, index) => (
-                      <li key={index} className="flex items-start gap-3 text-sm">
-                        <div className="w-4 h-4 bg-blue-500 rounded-full flex-shrink-0 mt-1"></div>
-                        <span className="text-gray-700 dark:text-gray-300">{advice}</span>
+                      <li key={index} className="flex items-start gap-2 sm:gap-3 text-xs sm:text-sm">
+                        <div className="w-3 h-3 sm:w-4 sm:h-4 bg-blue-500 rounded-full flex-shrink-0 mt-1"></div>
+                        <span className="text-gray-700 dark:text-gray-300 leading-relaxed">{advice}</span>
                       </li>
                     ))}
                   </ul>
@@ -531,16 +531,16 @@ export const PredictionForm = ({ disease }: PredictionFormProps) => {
 
               {/* Monitoring Guidelines */}
               {result.llmSuggestions.monitoringGuidelines.length > 0 && (
-                <Card className="p-6">
-                  <h4 className="text-lg font-semibold mb-4 flex items-center gap-2 text-purple-600 dark:text-purple-400">
-                    <TrendingUp className="w-5 h-5" />
+                <Card className="p-4 sm:p-6">
+                  <h4 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4 flex items-center gap-2 text-purple-600 dark:text-purple-400">
+                    <TrendingUp className="w-4 h-4 sm:w-5 sm:h-5" />
                     Monitoring Guidelines
                   </h4>
-                  <ul className="space-y-3">
+                  <ul className="space-y-2 sm:space-y-3">
                     {result.llmSuggestions.monitoringGuidelines.map((guideline, index) => (
-                      <li key={index} className="flex items-start gap-3 text-sm">
-                        <div className="w-4 h-4 bg-purple-500 rounded-full flex-shrink-0 mt-1"></div>
-                        <span className="text-gray-700 dark:text-gray-300">{guideline}</span>
+                      <li key={index} className="flex items-start gap-2 sm:gap-3 text-xs sm:text-sm">
+                        <div className="w-3 h-3 sm:w-4 sm:h-4 bg-purple-500 rounded-full flex-shrink-0 mt-1"></div>
+                        <span className="text-gray-700 dark:text-gray-300 leading-relaxed">{guideline}</span>
                       </li>
                     ))}
                   </ul>
@@ -550,15 +550,15 @@ export const PredictionForm = ({ disease }: PredictionFormProps) => {
 
             {/* Next Steps */}
             {result.nextSteps.length > 0 && (
-              <Card className="p-6 bg-gradient-to-r from-indigo-50 to-blue-50 dark:from-gray-800 dark:to-gray-700 border-indigo-200 dark:border-gray-600">
-                <h4 className="text-lg font-semibold mb-4 text-indigo-700 dark:text-indigo-300">Recommended Next Steps</h4>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <Card className="p-4 sm:p-6 bg-gradient-to-r from-indigo-50 to-blue-50 dark:from-gray-800 dark:to-gray-700 border-indigo-200 dark:border-gray-600">
+                <h4 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4 text-indigo-700 dark:text-indigo-300">Recommended Next Steps</h4>
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 sm:gap-3">
                   {result.nextSteps.map((step, index) => (
-                    <div key={index} className="flex items-start gap-3 p-3 bg-white dark:bg-gray-800 rounded-lg border border-indigo-100 dark:border-gray-600">
-                      <div className="w-6 h-6 bg-indigo-100 dark:bg-indigo-900/30 rounded-full flex items-center justify-center flex-shrink-0">
+                    <div key={index} className="flex items-start gap-2 sm:gap-3 p-3 bg-white dark:bg-gray-800 rounded-lg border border-indigo-100 dark:border-gray-600">
+                      <div className="w-5 h-5 sm:w-6 sm:h-6 bg-indigo-100 dark:bg-indigo-900/30 rounded-full flex items-center justify-center flex-shrink-0">
                         <span className="text-xs font-bold text-indigo-600 dark:text-indigo-400">{index + 1}</span>
                       </div>
-                      <span className="text-sm text-gray-700 dark:text-gray-300">{step}</span>
+                      <span className="text-xs sm:text-sm text-gray-700 dark:text-gray-300 leading-relaxed">{step}</span>
                     </div>
                   ))}
                 </div>
@@ -566,39 +566,39 @@ export const PredictionForm = ({ disease }: PredictionFormProps) => {
             )}
 
             {/* Action Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col lg:flex-row gap-3 sm:gap-4">
               <Button
                 onClick={generatePDF}
-                className="flex-1 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white transition-all duration-300"
+                className="flex-1 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white transition-all duration-300 py-2.5 sm:py-3 text-sm sm:text-base"
               >
-                <Download className="w-4 h-4 mr-2" />
-                Download Comprehensive Report
+                <Download className="w-3 h-3 sm:w-4 sm:h-4 mr-2" />
+                Download Report
               </Button>
               <Button
                 onClick={navigateToChat}
-                className="flex-1 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white transition-all duration-300"
+                className="flex-1 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white transition-all duration-300 py-2.5 sm:py-3 text-sm sm:text-base"
               >
-                <MessageCircle className="w-4 h-4 mr-2" />
+                <MessageCircle className="w-3 h-3 sm:w-4 sm:h-4 mr-2" />
                 Chat About Report
               </Button>
               <Button
                 variant="outline"
                 onClick={() => setResult(null)}
-                className="flex-1 border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800"
+                className="flex-1 border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 py-2.5 sm:py-3 text-sm sm:text-base"
               >
                 Run New Assessment
               </Button>
             </div>
 
             {/* Disclaimer */}
-            <div className="p-6 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-2xl">
+            <div className="p-4 sm:p-6 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-xl sm:rounded-2xl">
               <div className="flex items-start gap-3">
-                <Shield className="w-5 h-5 text-amber-600 dark:text-amber-400 mt-0.5 flex-shrink-0" />
+                <Shield className="w-4 h-4 sm:w-5 sm:h-5 text-amber-600 dark:text-amber-400 mt-0.5 flex-shrink-0" />
                 <div>
-                  <p className="text-sm text-amber-800 dark:text-amber-200 font-medium mb-1">
+                  <p className="text-xs sm:text-sm text-amber-800 dark:text-amber-200 font-medium mb-1">
                     <strong>⚠️ Important Medical Disclaimer</strong>
                   </p>
-                  <p className="text-sm text-amber-700 dark:text-amber-300 leading-relaxed">
+                  <p className="text-xs sm:text-sm text-amber-700 dark:text-amber-300 leading-relaxed">
                     This AI-powered risk assessment is for informational purposes only and should not replace professional medical advice, diagnosis, or treatment. 
                     The predictions are based on machine learning models and may not account for all individual health factors. 
                     Always consult with qualified healthcare providers for proper medical evaluation and treatment decisions.

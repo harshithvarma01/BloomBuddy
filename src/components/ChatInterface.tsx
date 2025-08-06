@@ -39,40 +39,40 @@ const UserAvatar = ({ size = "w-10 h-10" }: { size?: string }) => (
 // Enhanced Header Avatar
 const HeaderAvatar = () => (
   <div className="relative group">
-    {/* Main Avatar Container */}
-    <div className="w-16 h-16 rounded-3xl bg-gradient-to-br from-violet-600 via-indigo-600 to-blue-600 flex items-center justify-center shadow-2xl border-3 border-white/40 backdrop-blur-sm relative overflow-hidden">
+    {/* Main Avatar Container - Smaller on mobile */}
+    <div className="w-10 h-10 sm:w-12 sm:h-12 lg:w-16 lg:h-16 rounded-2xl sm:rounded-3xl bg-gradient-to-br from-violet-600 via-indigo-600 to-blue-600 flex items-center justify-center shadow-2xl border-2 sm:border-3 border-white/40 backdrop-blur-sm relative overflow-hidden">
       {/* Animated Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-pink-500/30 via-purple-500/30 to-blue-500/30 animate-pulse opacity-60"></div>
       
       {/* Main Icon */}
       <div className="relative z-10">
-        <Brain className="w-8 h-8 text-white drop-shadow-lg" />
+        <Brain className="w-4 h-4 sm:w-6 sm:h-6 lg:w-8 lg:h-8 text-white drop-shadow-lg" />
         
         {/* Intelligence Indicator */}
-        <div className="absolute -top-1.5 -right-1.5 w-5 h-5 bg-gradient-to-r from-amber-400 to-orange-500 rounded-full border-2 border-white/80 flex items-center justify-center shadow-lg">
-          <Zap className="w-3 h-3 text-white drop-shadow-sm" />
+        <div className="absolute -top-0.5 sm:-top-1 lg:-top-1.5 -right-0.5 sm:-right-1 lg:-right-1.5 w-3 h-3 sm:w-4 sm:h-4 lg:w-5 lg:h-5 bg-gradient-to-r from-amber-400 to-orange-500 rounded-full border border-white/80 sm:border-2 flex items-center justify-center shadow-lg">
+          <Zap className="w-1.5 h-1.5 sm:w-2 sm:h-2 lg:w-3 lg:h-3 text-white drop-shadow-sm" />
         </div>
       </div>
       
-      {/* Sparkle Effects */}
-      <div className="absolute top-2 left-2 w-1.5 h-1.5 bg-white/80 rounded-full animate-ping"></div>
-      <div className="absolute bottom-3 right-2 w-1 h-1 bg-white/60 rounded-full animate-pulse delay-300"></div>
+      {/* Sparkle Effects - Smaller on mobile */}
+      <div className="absolute top-1 sm:top-2 left-1 sm:left-2 w-1 h-1 sm:w-1.5 sm:h-1.5 bg-white/80 rounded-full animate-ping"></div>
+      <div className="absolute bottom-1.5 sm:bottom-3 right-1 sm:right-2 w-0.5 h-0.5 sm:w-1 sm:h-1 bg-white/60 rounded-full animate-pulse delay-300"></div>
       
       {/* Rotating Ring */}
-      <div className="absolute inset-0 rounded-3xl border-2 border-gradient-to-r border-white/20 animate-spin" style={{ animationDuration: '8s' }}></div>
+      <div className="absolute inset-0 rounded-2xl sm:rounded-3xl border border-white/20 sm:border-2 animate-spin" style={{ animationDuration: '8s' }}></div>
     </div>
     
-    {/* Status Indicator */}
-    <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-gradient-to-r from-emerald-400 to-green-500 rounded-full border-3 border-white flex items-center justify-center shadow-xl">
-      <div className="w-2.5 h-2.5 bg-white rounded-full animate-pulse"></div>
+    {/* Status Indicator - Smaller on mobile */}
+    <div className="absolute -bottom-0.5 sm:-bottom-1 -right-0.5 sm:-right-1 w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 bg-gradient-to-r from-emerald-400 to-green-500 rounded-full border-2 sm:border-3 border-white flex items-center justify-center shadow-xl">
+      <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 lg:w-2.5 lg:h-2.5 bg-white rounded-full animate-pulse"></div>
     </div>
     
-    {/* Floating Elements */}
-    <div className="absolute -top-2 -left-2 w-3 h-3 bg-gradient-to-r from-pink-400 to-rose-500 rounded-full opacity-80 animate-bounce delay-150"></div>
-    <div className="absolute -bottom-2 -left-3 w-2 h-2 bg-gradient-to-r from-blue-400 to-cyan-500 rounded-full opacity-70 animate-bounce delay-500"></div>
+    {/* Floating Elements - Smaller on mobile */}
+    <div className="absolute -top-1 sm:-top-2 -left-1 sm:-left-2 w-2 h-2 sm:w-3 sm:h-3 bg-gradient-to-r from-pink-400 to-rose-500 rounded-full opacity-80 animate-bounce delay-150"></div>
+    <div className="absolute -bottom-1 sm:-bottom-2 -left-1.5 sm:-left-3 w-1.5 h-1.5 sm:w-2 sm:h-2 bg-gradient-to-r from-blue-400 to-cyan-500 rounded-full opacity-70 animate-bounce delay-500"></div>
     
-    {/* Glow Effect */}
-    <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-violet-400/40 to-blue-400/40 blur-lg scale-110 opacity-60 group-hover:opacity-80 transition-opacity duration-300"></div>
+    {/* Glow Effect - Smaller on mobile */}
+    <div className="absolute inset-0 rounded-2xl sm:rounded-3xl bg-gradient-to-br from-violet-400/40 to-blue-400/40 blur-sm sm:blur-lg scale-110 opacity-60 group-hover:opacity-80 transition-opacity duration-300"></div>
   </div>
 );
 
@@ -200,72 +200,72 @@ export const ChatInterface = ({ onSymptomFlow, onReportFlow, initialReportData }
   return (
     <Card className="w-full max-w-7xl mx-auto h-[85vh] min-h-[600px] max-h-[900px] modern-card animate-fade-in">
       <div className="flex flex-col h-full">
-        {/* Chat Header */}
-        <div className="relative p-4 sm:p-6 border-b border-white/20 bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600 rounded-t-2xl overflow-hidden">
-          {/* Animated Background Pattern */}
+        {/* Chat Header - Compact on mobile */}
+        <div className="relative p-3 sm:p-4 lg:p-6 border-b border-white/20 bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600 rounded-t-2xl overflow-hidden">
+          {/* Animated Background Pattern - Smaller on mobile */}
           <div className="absolute inset-0 opacity-20">
-            <div className="absolute top-4 left-8 w-12 h-12 bg-white/10 rounded-full animate-float"></div>
-            <div className="absolute top-12 right-12 w-8 h-8 bg-white/5 rounded-full animate-float delay-300"></div>
-            <div className="absolute bottom-8 left-16 w-6 h-6 bg-white/8 rounded-full animate-float delay-700"></div>
-            <div className="absolute bottom-4 right-8 w-10 h-10 bg-white/6 rounded-full animate-float delay-1000"></div>
+            <div className="absolute top-2 sm:top-4 left-4 sm:left-8 w-6 h-6 sm:w-12 sm:h-12 bg-white/10 rounded-full animate-float"></div>
+            <div className="absolute top-6 sm:top-12 right-6 sm:right-12 w-4 h-4 sm:w-8 sm:h-8 bg-white/5 rounded-full animate-float delay-300"></div>
+            <div className="absolute bottom-4 sm:bottom-8 left-8 sm:left-16 w-3 h-3 sm:w-6 sm:h-6 bg-white/8 rounded-full animate-float delay-700"></div>
+            <div className="absolute bottom-2 sm:bottom-4 right-4 sm:right-8 w-5 h-5 sm:w-10 sm:h-10 bg-white/6 rounded-full animate-float delay-1000"></div>
           </div>
           
-          {/* Main Header Content */}
-          <div className="relative z-10 flex flex-col sm:flex-row items-center gap-3 sm:gap-5">
-            <HeaderAvatar />
-            <div className="flex-1 text-center sm:text-left">
-              <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 mb-2">
-                <h2 className="text-xl sm:text-2xl font-bold text-white tracking-wide drop-shadow-lg">BloomBuddy AI</h2>
-                <div className="px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full border border-white/30 mx-auto sm:mx-0 w-fit">
+          {/* Main Header Content - More compact on mobile */}
+          <div className="relative z-10 flex flex-row items-center gap-2 sm:gap-3 lg:gap-5">
+            <div className="flex-shrink-0">
+              <HeaderAvatar />
+            </div>
+            <div className="flex-1 min-w-0">
+              <div className="flex flex-col lg:flex-row lg:items-center gap-1 sm:gap-2 mb-1 sm:mb-2">
+                <h2 className="text-base sm:text-xl lg:text-2xl font-bold text-white tracking-wide drop-shadow-lg truncate">BloomBuddy AI</h2>
+                <div className="px-2 sm:px-3 py-0.5 sm:py-1 bg-white/20 backdrop-blur-sm rounded-full border border-white/30 w-fit lg:mx-0">
                   <span className="text-xs font-semibold text-white/90 uppercase tracking-wider">Health Assistant</span>
                 </div>
               </div>
-              <p className="text-white/90 text-xs sm:text-sm flex flex-col sm:flex-row items-center gap-2 sm:gap-3 font-medium">
-                <div className="flex items-center gap-2">
-                  <div className="w-2.5 h-2.5 bg-emerald-400 rounded-full animate-pulse shadow-lg"></div>
-                  <span className="drop-shadow-sm text-center sm:text-left">
-                    {hasConfiguredProvider 
-                      ? 'Online • Ready to help with your health questions' 
-                      : 'Configuration needed • Please set up API key'
-                    }
-                  </span>
-                </div>
+              <p className="text-white/90 text-xs sm:text-sm flex items-center gap-1 sm:gap-2 font-medium">
+                <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 bg-emerald-400 rounded-full animate-pulse shadow-lg flex-shrink-0"></div>
+                <span className="drop-shadow-sm truncate">
+                  {hasConfiguredProvider 
+                    ? 'Online • Ready to help' 
+                    : 'Configuration needed'
+                  }
+                </span>
               </p>
             </div>
             
-            {/* Enhanced Controls */}
-            <div className="flex items-center gap-2 sm:gap-3 mt-3 sm:mt-0">
+            {/* Enhanced Controls - More compact */}
+            <div className="flex items-center gap-1 sm:gap-2 flex-shrink-0">
               <Button
                 variant="ghost"
                 size="sm"
                 onClick={() => setShowProviderSettings(!showProviderSettings)}
-                className="text-white/90 hover:text-white hover:bg-white/20 transition-all duration-300 rounded-xl p-2 sm:p-3 backdrop-blur-sm border border-white/20 shadow-lg"
+                className="text-white/90 hover:text-white hover:bg-white/20 transition-all duration-300 rounded-lg sm:rounded-xl p-1.5 sm:p-2 lg:p-3 backdrop-blur-sm border border-white/20 shadow-lg"
               >
-                <Settings className="w-4 h-4 sm:w-5 sm:h-5 drop-shadow-sm" />
+                <Settings className="w-3 h-3 sm:w-4 sm:h-4 lg:w-5 lg:h-5 drop-shadow-sm" />
               </Button>
               
-              <div className="hidden md:flex items-center gap-3 bg-white/15 backdrop-blur-md rounded-2xl px-3 sm:px-4 py-2 sm:py-3 border border-white/20 shadow-xl">
+              <div className="hidden lg:flex items-center gap-2 sm:gap-3 bg-white/15 backdrop-blur-md rounded-xl sm:rounded-2xl px-2 sm:px-3 lg:px-4 py-1.5 sm:py-2 lg:py-3 border border-white/20 shadow-xl">
                 <div className="relative">
-                  <Activity className="w-4 h-4 sm:w-5 sm:h-5 text-white/90 drop-shadow-sm" />
-                  <div className="absolute -top-1 -right-1 w-2 h-2 bg-emerald-400 rounded-full animate-ping"></div>
+                  <Activity className="w-3 h-3 sm:w-4 sm:h-4 lg:w-5 lg:h-5 text-white/90 drop-shadow-sm" />
+                  <div className="absolute -top-0.5 sm:-top-1 -right-0.5 sm:-right-1 w-1.5 h-1.5 sm:w-2 sm:h-2 bg-emerald-400 rounded-full animate-ping"></div>
                 </div>
-                <div className="h-4 w-px bg-white/30"></div>
+                <div className="h-3 sm:h-4 w-px bg-white/30"></div>
                 <span className="text-white/95 text-xs sm:text-sm font-semibold tracking-wide drop-shadow-sm">AI Health Assistant</span>
               </div>
             </div>
           </div>
 
-          {/* Enhanced Provider Settings */}
+          {/* Enhanced Provider Settings - More compact on mobile */}
           {showProviderSettings && (
-            <div className="relative z-10 mt-6 p-5 bg-white/15 backdrop-blur-md rounded-2xl border border-white/20 shadow-2xl">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-8 h-8 bg-white/20 rounded-xl flex items-center justify-center">
-                  <Settings className="w-4 h-4 text-white" />
+            <div className="relative z-10 mt-3 sm:mt-4 lg:mt-6 p-3 sm:p-4 lg:p-5 bg-white/15 backdrop-blur-md rounded-xl sm:rounded-2xl border border-white/20 shadow-2xl">
+              <div className="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-4">
+                <div className="w-6 h-6 sm:w-8 sm:h-8 bg-white/20 rounded-lg sm:rounded-xl flex items-center justify-center">
+                  <Settings className="w-3 h-3 sm:w-4 sm:h-4 text-white" />
                 </div>
-                <h3 className="text-white font-semibold text-lg tracking-wide drop-shadow-sm">AI Provider Settings</h3>
+                <h3 className="text-white font-semibold text-sm sm:text-base lg:text-lg tracking-wide drop-shadow-sm">AI Provider Settings</h3>
               </div>
               
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-3">
                 {providerStatus.map((provider) => (
                   <Button
                     key={provider.key}
@@ -273,14 +273,14 @@ export const ChatInterface = ({ onSymptomFlow, onReportFlow, initialReportData }
                     variant="outline"
                     onClick={() => provider.configured && switchProvider(provider.key)}
                     disabled={!provider.configured}
-                    className={`flex items-center gap-2 sm:gap-3 p-2 sm:p-3 rounded-xl border-2 transition-all duration-300 font-medium text-xs sm:text-sm ${
+                    className={`flex items-center gap-2 p-2 sm:p-3 rounded-lg sm:rounded-xl border-2 transition-all duration-300 font-medium text-xs sm:text-sm ${
                       provider.configured 
                         ? 'bg-white/20 border-white/40 text-white hover:bg-white/30 shadow-lg' 
                         : 'bg-white/5 border-white/20 text-white/60 cursor-not-allowed'
                     }`}
                   >
                     {provider.configured ? (
-                      <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-emerald-400 rounded-full shadow-lg animate-pulse" />
+                      <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 lg:w-3 lg:h-3 bg-emerald-400 rounded-full shadow-lg animate-pulse" />
                     ) : (
                       <AlertCircle className="w-3 h-3 sm:w-4 sm:h-4 text-amber-400 drop-shadow-sm" />
                     )}
@@ -290,8 +290,8 @@ export const ChatInterface = ({ onSymptomFlow, onReportFlow, initialReportData }
               </div>
               
               {!hasConfiguredProvider && (
-                <div className="mt-4 p-3 bg-amber-500/20 backdrop-blur-sm rounded-xl border border-amber-400/30">
-                  <p className="text-white/90 text-sm font-medium drop-shadow-sm">
+                <div className="mt-3 sm:mt-4 p-2 sm:p-3 bg-amber-500/20 backdrop-blur-sm rounded-lg sm:rounded-xl border border-amber-400/30">
+                  <p className="text-white/90 text-xs sm:text-sm font-medium drop-shadow-sm">
                     💡 Configure API keys in your .env file to enable AI responses
                   </p>
                 </div>
@@ -474,7 +474,7 @@ export const ChatInterface = ({ onSymptomFlow, onReportFlow, initialReportData }
                       : "Type your message..."
                   }
                   disabled={isLoading || !hasConfiguredProvider}
-                  className="pl-3 sm:pl-4 pr-10 sm:pr-12 py-2 sm:py-3 bg-white/70 border-primary/30 focus:border-primary transition-smooth rounded-lg sm:rounded-xl text-foreground placeholder:text-muted-foreground text-xs sm:text-sm"
+                  className="pl-3 sm:pl-4 pr-10 sm:pr-12 py-2 sm:py-3 bg-background/80 dark:bg-background/90 border-border/50 dark:border-border focus:border-primary dark:focus:border-primary transition-smooth rounded-lg sm:rounded-xl text-foreground placeholder:text-muted-foreground text-xs sm:text-sm shadow-sm"
                 />
                 <div className="absolute right-2 sm:right-3 top-1/2 -translate-y-1/2">
                   <Upload className="w-3 h-3 sm:w-4 sm:h-4 text-muted-foreground" />

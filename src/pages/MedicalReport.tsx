@@ -151,13 +151,13 @@ This analysis is for informational purposes only and should not replace professi
       
       <Header />
       
-      <main className="pt-20 pb-8 relative z-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <main className="pt-16 sm:pt-18 lg:pt-20 pb-6 sm:pb-8 relative z-10">
+        <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6 xl:px-8">
           {/* Compact Header Section */}
-          <div className="mb-6">
+          <div className="mb-4 sm:mb-6">
             {/* Breadcrumb */}
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-3 sm:mb-4 gap-3">
+              <div className="flex items-center gap-2 text-xs sm:text-sm text-muted-foreground order-2 sm:order-1">
                 <span>Home</span>
                 <span>/</span>
                 <span>Medical Reports</span>
@@ -167,85 +167,85 @@ This analysis is for informational purposes only and should not replace professi
               <Button
                 variant="ghost"
                 onClick={() => navigate('/')}
-                className="text-muted-foreground hover:text-foreground hover:bg-white/10 backdrop-blur-sm transition-all duration-200 border border-white/10"
+                className="text-muted-foreground hover:text-foreground hover:bg-white/10 backdrop-blur-sm transition-all duration-200 border border-white/10 order-1 sm:order-2 self-start sm:self-auto"
                 size="sm"
               >
-                <ArrowLeft className="w-4 h-4 mr-2" />
+                <ArrowLeft className="w-3 h-3 sm:w-4 sm:h-4 mr-2" />
                 Back to Home
               </Button>
             </div>
             
             {/* Compact Hero Section */}
-            <div className="flex flex-col lg:flex-row lg:items-center justify-between mb-6 gap-4">
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center">
-                  <Activity className="w-6 h-6 text-white" />
+            <div className="flex flex-col lg:flex-row lg:items-center justify-between mb-4 sm:mb-6 gap-3 sm:gap-4">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center">
+                  <Activity className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                 </div>
-                <div>
-                  <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
+                <div className="text-center sm:text-left">
+                  <h1 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white">
                     Medical Report Analysis
                   </h1>
-                  <div className="flex items-center gap-2 mt-1">
+                  <div className="flex items-center justify-center sm:justify-start gap-2 mt-1">
                     <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                    <span className="text-sm text-green-700 dark:text-green-300 font-medium">Analysis Complete</span>
+                    <span className="text-xs sm:text-sm text-green-700 dark:text-green-300 font-medium">Analysis Complete</span>
                   </div>
                 </div>
               </div>
               
               {/* Compact Action Buttons */}
-              <div className="flex gap-2 flex-wrap">
+              <div className="flex gap-2 flex-wrap justify-center sm:justify-start lg:justify-end">
                 <Button
                   onClick={handleChatAboutReport}
-                  className="flex items-center gap-2 bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70"
+                  className="flex items-center gap-1.5 sm:gap-2 bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 flex-1 sm:flex-none"
                   size="sm"
                 >
-                  <MessageCircle className="w-4 h-4" />
-                  Chat
+                  <MessageCircle className="w-3 h-3 sm:w-4 sm:h-4" />
+                  <span className="text-xs sm:text-sm">Chat</span>
                 </Button>
                 <Button
                   variant="outline"
                   onClick={handleShareReport}
-                  className="flex items-center gap-2"
+                  className="flex items-center gap-1.5 sm:gap-2 flex-1 sm:flex-none"
                   size="sm"
                 >
-                  <Share className="w-4 h-4" />
-                  Share
+                  <Share className="w-3 h-3 sm:w-4 sm:h-4" />
+                  <span className="text-xs sm:text-sm">Share</span>
                 </Button>
                 <Button
                   variant="outline"
                   onClick={handleDownloadReport}
-                  className="flex items-center gap-2"
+                  className="flex items-center gap-1.5 sm:gap-2 flex-1 sm:flex-none"
                   size="sm"
                 >
-                  <Download className="w-4 h-4" />
-                  Download
+                  <Download className="w-3 h-3 sm:w-4 sm:h-4" />
+                  <span className="text-xs sm:text-sm">Download</span>
                 </Button>
               </div>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6">
             {/* Adaptive Left Sidebar - Report Information */}
-            <div className="lg:col-span-3 xl:col-span-3 space-y-4">
+            <div className="lg:col-span-3 xl:col-span-3 space-y-3 sm:space-y-4 order-2 lg:order-1">
               {/* Compact Document Info */}
-              <Card className="p-4 bg-gradient-card backdrop-blur-sm border-0 shadow-lg">
-                <h3 className="font-bold text-foreground mb-3 flex items-center gap-2 text-sm">
-                  <FileText className="w-4 h-4 text-primary" />
+              <Card className="p-3 sm:p-4 bg-gradient-card backdrop-blur-sm border-0 shadow-lg">
+                <h3 className="font-bold text-foreground mb-2 sm:mb-3 flex items-center gap-2 text-xs sm:text-sm">
+                  <FileText className="w-3 h-3 sm:w-4 sm:h-4 text-primary" />
                   Document Information
                 </h3>
                 
-                <div className="space-y-3 text-sm">
+                <div className="space-y-2 sm:space-y-3 text-xs sm:text-sm">
                   <div className="flex flex-col gap-1">
                     <span className="text-muted-foreground font-medium">File:</span>
                     <span className="text-foreground break-all text-xs">{reportData.fileName}</span>
                   </div>
-                  <div className="flex justify-between items-center">
+                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-1">
                     <span className="text-muted-foreground font-medium">Date:</span>
                     <span className="text-foreground text-xs">{reportData.uploadDate}</span>
                   </div>
-                  <div className="flex justify-between items-center">
+                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-1">
                     <span className="text-muted-foreground font-medium">Type:</span>
-                    <div className="flex items-center gap-2">
+                    <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2">
                       <span className="text-foreground font-mono text-xs bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">{reportData.fileType}</span>
                       {reportData.documentType && (
                         <span className={`text-xs px-2 py-1 rounded ${
@@ -258,21 +258,21 @@ This analysis is for informational purposes only and should not replace professi
                       )}
                     </div>
                   </div>
-                  <div className="flex justify-between items-center">
+                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-1">
                     <span className="text-muted-foreground font-medium">Size:</span>
                     <span className="text-foreground text-xs">{reportData.fileSize}</span>
                   </div>
-                  <div className="flex justify-between items-center pt-2 border-t border-border/20">
+                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-1 pt-2 border-t border-border/20">
                     <span className="text-muted-foreground font-medium">AI:</span>
                     <div className="flex items-center gap-2">
-                      <div className="w-4 h-4 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center">
-                        <Sparkles className="w-2.5 h-2.5 text-white" />
+                      <div className="w-3 h-3 sm:w-4 sm:h-4 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center">
+                        <Sparkles className="w-1.5 h-1.5 sm:w-2.5 sm:h-2.5 text-white" />
                       </div>
                       <span className="text-foreground font-medium text-xs">BloomBuddy AI</span>
                     </div>
                   </div>
                   {reportData.confidence && (
-                    <div className="flex justify-between items-center pt-2">
+                    <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-1 pt-2">
                       <span className="text-muted-foreground font-medium">Confidence:</span>
                       <div className="flex items-center gap-2">
                         <div className={`w-2 h-2 rounded-full ${
@@ -287,9 +287,9 @@ This analysis is for informational purposes only and should not replace professi
               </Card>
               
               {/* Compact Status Card */}
-              <Card className="p-4 bg-gradient-card backdrop-blur-sm border-0 shadow-lg">
-                <h3 className="font-bold text-foreground mb-3 flex items-center gap-2 text-sm">
-                  <Activity className="w-4 h-4 text-primary" />
+              <Card className="p-3 sm:p-4 bg-gradient-card backdrop-blur-sm border-0 shadow-lg">
+                <h3 className="font-bold text-foreground mb-2 sm:mb-3 flex items-center gap-2 text-xs sm:text-sm">
+                  <Activity className="w-3 h-3 sm:w-4 sm:h-4 text-primary" />
                   Analysis Status
                 </h3>
                 
@@ -310,11 +310,11 @@ This analysis is for informational purposes only and should not replace professi
               </Card>
 
               {/* Compact Disclaimer */}
-              <Card className="p-4 bg-gradient-to-br from-amber-500/10 to-orange-500/5 backdrop-blur-sm border-amber-200/20 shadow-lg">
-                <div className="flex items-start gap-3">
-                  <Shield className="w-4 h-4 text-amber-600 flex-shrink-0 mt-0.5" />
+              <Card className="p-3 sm:p-4 bg-gradient-to-br from-amber-500/10 to-orange-500/5 backdrop-blur-sm border-amber-200/20 shadow-lg">
+                <div className="flex items-start gap-2 sm:gap-3">
+                  <Shield className="w-3 h-3 sm:w-4 sm:h-4 text-amber-600 flex-shrink-0 mt-0.5" />
                   <div>
-                    <h4 className="font-bold text-amber-800 dark:text-amber-200 mb-2 text-xs">Medical Disclaimer</h4>
+                    <h4 className="font-bold text-amber-800 dark:text-amber-200 mb-1 sm:mb-2 text-xs">Medical Disclaimer</h4>
                     <p className="text-xs text-amber-700 dark:text-amber-300 leading-relaxed">
                       AI analysis for informational purposes only. Consult healthcare providers for medical advice.
                     </p>
@@ -324,62 +324,62 @@ This analysis is for informational purposes only and should not replace professi
             </div>
 
             {/* Main Content - Adaptive Analysis Results */}
-            <div className="lg:col-span-9 xl:col-span-9">
-              <Card className="p-6 bg-gradient-card backdrop-blur-sm border-0 shadow-lg h-fit">
-                <div className="flex items-center justify-between mb-6">
-                  <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center">
-                      <TrendingUp className="w-4 h-4 text-white" />
+            <div className="lg:col-span-9 xl:col-span-9 order-1 lg:order-2">
+              <Card className="p-4 sm:p-6 bg-gradient-card backdrop-blur-sm border-0 shadow-lg h-fit">
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 sm:mb-6 gap-3">
+                  <div className="flex items-center gap-2 sm:gap-3">
+                    <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center">
+                      <TrendingUp className="w-3 h-3 sm:w-4 sm:h-4 text-white" />
                     </div>
                     <div>
-                      <h3 className="text-xl font-bold text-foreground">Analysis Results</h3>
+                      <h3 className="text-lg sm:text-xl font-bold text-foreground">Analysis Results</h3>
                       <p className="text-xs text-muted-foreground">AI-powered medical insights</p>
                     </div>
                   </div>
-                  <div className="flex items-center gap-2 px-3 py-1 bg-green-100 dark:bg-green-900/30 rounded-full">
-                    <Eye className="w-3 h-3 text-green-600" />
+                  <div className="flex items-center gap-2 px-2 sm:px-3 py-1 bg-green-100 dark:bg-green-900/30 rounded-full">
+                    <Eye className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-green-600" />
                     <span className="text-xs font-medium text-green-700 dark:text-green-300">Reviewed</span>
                   </div>
                 </div>
                 
                 {/* Scrollable content area for large analysis */}
-                <div className="max-h-[70vh] overflow-y-auto pr-2 space-y-1 mb-6">
-                  <div className="prose prose-sm max-w-none">
+                <div className="max-h-[60vh] sm:max-h-[70vh] overflow-y-auto pr-1 sm:pr-2 space-y-1 mb-4 sm:mb-6">
+                  <div className="prose prose-xs sm:prose-sm max-w-none">
                     {formatAnalysis(reportData.analysis)}
                   </div>
                 </div>
                 
                 {/* Compact Chat CTA */}
-                <div className="p-4 bg-gradient-to-r from-primary/10 via-accent/10 to-primary/5 rounded-lg border border-primary/20">
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                    <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center">
-                        <MessageCircle className="w-4 h-4 text-white" />
+                <div className="p-3 sm:p-4 bg-gradient-to-r from-primary/10 via-accent/10 to-primary/5 rounded-lg border border-primary/20">
+                  <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-3 sm:gap-4">
+                    <div className="flex items-center gap-2 sm:gap-3">
+                      <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center">
+                        <MessageCircle className="w-3 h-3 sm:w-4 sm:h-4 text-white" />
                       </div>
                       <div>
-                        <h4 className="font-bold text-foreground text-sm">Have questions about this report?</h4>
+                        <h4 className="font-bold text-foreground text-xs sm:text-sm">Have questions about this report?</h4>
                         <p className="text-xs text-muted-foreground">Get personalized insights and expert guidance</p>
                       </div>
                     </div>
                     <Button 
                       onClick={handleChatAboutReport}
-                      className="bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 flex items-center gap-2 whitespace-nowrap"
+                      className="bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 flex items-center gap-1.5 sm:gap-2 whitespace-nowrap w-full lg:w-auto justify-center"
                       size="sm"
                     >
-                      <MessageCircle className="w-4 h-4" />
-                      Start Chat
-                      <Sparkles className="w-3 h-3" />
+                      <MessageCircle className="w-3 h-3 sm:w-4 sm:h-4" />
+                      <span className="text-xs sm:text-sm">Start Chat</span>
+                      <Sparkles className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
                     </Button>
                   </div>
                 </div>
                 
-                <div className="mt-4 pt-4 border-t border-border/20">
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs">
+                <div className="mt-3 sm:mt-4 pt-3 sm:pt-4 border-t border-border/20">
+                  <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-2 text-xs">
                     <div className="flex items-center gap-2">
                       <Sparkles className="w-3 h-3 text-primary" />
                       <span className="text-muted-foreground">Generated by BloomBuddy AI • {reportData.uploadDate}</span>
                     </div>
-                    <div className="flex items-center gap-4">
+                    <div className="flex items-center gap-3 sm:gap-4">
                       <div className="flex items-center gap-1">
                         <div className="w-1.5 h-1.5 bg-green-500 rounded-full"></div>
                         <span className="text-muted-foreground">Complete</span>

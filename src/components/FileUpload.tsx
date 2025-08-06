@@ -132,16 +132,16 @@ export const FileUpload = ({ onFileAnalyzed }: FileUploadProps) => {
   };
 
   return (
-    <Card className="w-full max-w-2xl mx-auto p-8 bg-gradient-card backdrop-blur-sm border-0 shadow-card">
-      <div className="text-center mb-6">
-        <h2 className="text-2xl font-bold text-foreground mb-2">Upload Medical Report</h2>
-        <p className="text-muted-foreground">
+    <Card className="w-full max-w-3xl mx-auto p-6 sm:p-8 bg-gradient-card backdrop-blur-sm border-0 shadow-card">
+      <div className="text-center mb-4 sm:mb-6">
+        <h2 className="text-xl sm:text-2xl font-bold text-foreground mb-2">Upload Medical Report</h2>
+        <p className="text-sm sm:text-base text-muted-foreground">
           Upload your medical reports for AI-powered analysis
         </p>
       </div>
 
       <div
-        className={`relative border-2 border-dashed rounded-lg p-8 text-center transition-all duration-300 ${
+        className={`relative border-2 border-dashed rounded-lg p-6 sm:p-8 text-center transition-all duration-300 ${
           dragActive 
             ? 'border-primary bg-primary/5' 
             : 'border-border/50 hover:border-primary/50 bg-white/30'
@@ -161,43 +161,43 @@ export const FileUpload = ({ onFileAnalyzed }: FileUploadProps) => {
           title="Upload medical report file"
         />
         
-        <div className="flex flex-col items-center space-y-4">
+        <div className="flex flex-col items-center space-y-3 sm:space-y-4">
           {isAnalyzing ? (
             <>
-              <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center animate-pulse">
-                <FileText className="w-8 h-8 text-primary animate-pulse" />
+              <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-primary/10 flex items-center justify-center animate-pulse">
+                <FileText className="w-6 h-6 sm:w-8 sm:h-8 text-primary animate-pulse" />
               </div>
-              <div className="space-y-2">
-                <p className="text-lg font-medium text-foreground">Analyzing your report...</p>
-                <p className="text-sm text-muted-foreground">
+              <div className="space-y-1 sm:space-y-2">
+                <p className="text-base sm:text-lg font-medium text-foreground">Analyzing your report...</p>
+                <p className="text-xs sm:text-sm text-muted-foreground">
                   Our AI is processing your medical document
                 </p>
               </div>
             </>
           ) : uploadedFile ? (
             <>
-              <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center">
-                <CheckCircle className="w-8 h-8 text-green-600" />
+              <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-green-100 flex items-center justify-center">
+                <CheckCircle className="w-6 h-6 sm:w-8 sm:h-8 text-green-600" />
               </div>
-              <div className="space-y-2">
-                <p className="text-lg font-medium text-foreground">File uploaded successfully</p>
-                <p className="text-sm text-muted-foreground">{uploadedFile.name}</p>
+              <div className="space-y-1 sm:space-y-2">
+                <p className="text-base sm:text-lg font-medium text-foreground">File uploaded successfully</p>
+                <p className="text-xs sm:text-sm text-muted-foreground break-all">{uploadedFile.name}</p>
               </div>
             </>
           ) : (
             <>
-              <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center">
-                <Upload className="w-8 h-8 text-primary" />
+              <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-primary/10 flex items-center justify-center">
+                <Upload className="w-6 h-6 sm:w-8 sm:h-8 text-primary" />
               </div>
-              <div className="space-y-2">
-                <p className="text-lg font-medium text-foreground">
+              <div className="space-y-1 sm:space-y-2">
+                <p className="text-base sm:text-lg font-medium text-foreground">
                   Drop your medical report here
                 </p>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-xs sm:text-sm text-muted-foreground">
                   or click to browse (PDF, JPG, PNG - max 10MB)
                 </p>
               </div>
-              <Button variant="outline" className="mt-4">
+              <Button variant="outline" className="mt-3 sm:mt-4 px-4 sm:px-6 py-2 sm:py-2.5 text-sm sm:text-base">
                 Choose File
               </Button>
             </>
@@ -206,10 +206,10 @@ export const FileUpload = ({ onFileAnalyzed }: FileUploadProps) => {
       </div>
 
       {(uploadedFile || isAnalyzing) && (
-        <div className="mt-6 p-4 bg-accent/20 rounded-lg border border-accent/30">
+        <div className="mt-4 sm:mt-6 p-3 sm:p-4 bg-accent/20 rounded-lg border border-accent/30">
           <div className="flex items-start gap-3">
-            <AlertCircle className="w-5 h-5 text-amber-600 mt-0.5 flex-shrink-0" />
-            <div className="text-sm">
+            <AlertCircle className="w-4 h-4 sm:w-5 sm:h-5 text-amber-600 mt-0.5 flex-shrink-0" />
+            <div className="text-xs sm:text-sm">
               <p className="font-medium text-foreground mb-1">Important Disclaimer</p>
               <p className="text-muted-foreground">
                 This is an automated analysis and should not replace professional medical advice. 
